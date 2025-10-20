@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Festas</title>
+  <link rel="stylesheet" href="assets/nav.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- side bar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo do sistema"> <!-- imagem do logo '0' -->
+      </div>
+
+      <nav class="menu">
+        <a href="home.html" class="menu-item">
+            <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
+          <span>Principal</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="shopping-bag"></i>
+          <span>Pedidos</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="users"></i>
+          <span>Clientes</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="package"></i>
+          <span>Itens</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="truck"></i>
+          <span>Logística</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="wallet"></i>
+          <span>Financeiro</span>
+        </a>
+      </nav>
+
+      <div class="logout">
+        <a href="#">
+          <i data-lucide="log-out"></i>
+          <span>Sair</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <h1>Bem-vindo de volta, NOME!</h1>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

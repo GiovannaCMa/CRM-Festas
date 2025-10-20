@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+    --cor-primaria: #471651;
+    --back-color: #F1E9F2;
+    --text-color: #3F1947;
+}
+
+body {
+  background-color: var(--back-color);
+  color: var(--text-color);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  width: 260px;
+  background-color: var(--cor-primaria);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+  color: #fff;
+}
+
+.logo img {
+  width: 60px;
+  margin-bottom: 32px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ddd;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #5A1A85;
+  color: #fff;
+}
+
+.menu-item.active {
+  background-color: #5A1A85;
+  color: #fff;
+  border-left: 4px solid #fff;
+  padding-left: 8px;
+}
+
+.logout {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+}
+
+.logout a {
+  color: #ddd;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s;
+}
+
+.logout a:hover {
+  color: #fff;
+}
+
+/* ====== MAIN CONTENT ====== */
+.main {
+  flex: 1;
+  padding: 48px;
+}
