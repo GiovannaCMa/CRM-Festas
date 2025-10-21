@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Financeiro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="assets/finanças.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="Logo do sistema" />
+        </div>
+
+        <nav class="menu">
+          <a href="../nav-bar/home.html" class="menu-item">
+            <i data-lucide="home"></i>
+            <span>Principal</span>
+          </a>
+          <a href="pedidos.html" class="menu-item">
+            <i data-lucide="shopping-bag"></i>
+            <span>Pedidos</span>
+          </a>
+          <a href="clientes.html" class="menu-item">
+            <i data-lucide="users"></i>
+            <span>Clientes</span>
+          </a>
+          <a href="itens.html" class="menu-item">
+            <i data-lucide="package"></i>
+            <span>Itens</span>
+          </a>
+          <a href="logistica.html" class="menu-item">
+            <i data-lucide="truck"></i>
+            <span>Logística</span>
+          </a>
+          <a href="finanças.html" class="menu-item active">
+            <i data-lucide="wallet"></i>
+            <span>Financeiro</span>
+          </a>
+        </nav>
+
+        <div class="logout">
+          <a href="#">
+            <i data-lucide="log-out"></i>
+            <span>Sair</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- ===== MAIN ===== -->
+       
+      <main class="main">
+        <h2>Financeiro</h2>
+        <section class="painel-financeiro">
+
+          <div class="top-bar">
+            <div class="resumo">
+              <div>
+                <h4>Entradas</h4>
+                <p>R$ 3.000,00</p>
+              </div>
+              <div>
+                <h4>Saídas</h4>
+                <p>R$ 1.200,00</p>
+              </div>
+            </div>
+
+            <div class="saldo">
+              <h4>Saldo Atual</h4>
+              <p>R$ 6.360,00</p>
+            </div>
+
+            <button class="nova-transacao">
+              <i data-lucide="plus"></i> Nova Transação
+            </button>
+          </div>
+
+          <!-- FORM -->
+          <form id="formTransacao" class="form-transacao escondido">
+            <h3>Adicionar Transação</h3>
+
+            <label for="descricao">Descrição:</label>
+            <input
+              type="text"
+              id="descricao"
+              placeholder="Digite a descrição"
+            />
+
+            <div class="linha">
+              <div>
+                <label for="valor">Valor:</label>
+                <input  id="valor" placeholder="Ex: 500.00" />
+              </div>
+
+              <div>
+                <label for="tipo">Tipo:</label>
+                <select id="tipo">
+                  <option value="entrada">Entrada</option>
+                  <option value="saida">Saída</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-aplicar">Aplicar</button>
+          </form>
+
+          <!-- TABELA -->
+          <table class="tabela">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>10/10/2025</td>
+                <td><em>Decoração Branca de Neve</em></td>
+                <td>Entrada</td>
+                <td>R$ 1.000,00</td>
+              </tr>
+              <tr>
+                <td>14/07/2025</td>
+                <td><em>Compra de mesas</em></td>
+                <td>Saída</td>
+                <td>R$ 500,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="assets/finanças.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
