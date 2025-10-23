@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --cor-texto-secundario: #ffffff;
+    --cor-texto: #000000;
+    --cor-container:#471651;
+    --cor-secuncdaria: #540664;
+}
+.container{
+    display: flex;
+    flex-direction: row-reverse;
+    min-height: 100vh;
+}
+
+.container img{
+    width: 400px;
+    margin-top:40px;
+}
+.painel{
+    background-color: var(--cor-container);
+    padding: 90px 90px 4.2%;
+    box-sizing: border-box;   
+    border-top-left-radius: 60px;
+    align-items: flex-end;
+    flex-direction: column;
+    min-height: 100vh;
+    border-bottom-left-radius: 60px;
+
+}
+
+.painel h2{
+    font-size: 50px;
+    font-family: "Inter", sans-serif;
+    color: var(--cor-texto-secundario);
+}
+
+.painel_form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 900px;   
+    margin: 0 auto;  
+}
+/* ...existing code... */
+.painel_form img{
+    width: 140px;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+    font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+
+}
+.formulario input{
+    width: 300px;
+    padding: 15px 40px 15px 17px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #F0F0F0;
+
+}
+h1{
+    font-family: "Quicksand", sans-serif;
+    font-weight: 450;
+    font-size: 45px;
+}
+.linha{
+    height: 5px;
+    width: 200px;
+    background-color: var(--cor-container);
+}
+/* ...existing code... */
+.painel_form button {
+  background-color: var(--cor-container);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 30px;
+}
+
+
+.btn-primary:hover,
+.painel_form button:hover {
+  background-color:var(--cor-secuncdaria);  
+  transform: translateY(-3px); 
+  box-shadow: 0 6px 18px rgba(71,22,81,0.12);
+}
+/* ...existing code... */
+
