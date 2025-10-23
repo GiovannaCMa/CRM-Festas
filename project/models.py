@@ -78,13 +78,15 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Cliente(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    telefone = models.CharField(max_length=20)
+    nome = models.CharField(max_length=199, blank=True, null=True)
+    email = models.CharField(max_length=199, blank=True, null=True)
+    telefone = models.CharField(max_length=11, blank=True, null=True)
 
-    def _str_(self):
-        return self.nome
-    
+    class Meta:
+        managed = False
+        db_table = 'cliente'
+
+
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -130,14 +132,17 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Festa(models.Model):
-    nome_festa = models.CharField(max_length=100)
+class Festas(models.Model):
     data = models.DateField()
-    local = models.CharField(max_length=150)
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    local = models.CharField(max_length=255, blank=True, null=True)
+    cliente = models.ForeignKey(Cliente, models.DO_NOTHING)
+    tema = models.ForeignKey('Temas', models.DO_NOTHING)
+    preco = models.FloatField(blank=True, null=True)
 
-    def _str_(self):
-        return self.nome_festa
+    class Meta:
+        managed = False
+        db_table = 'festas'
+
 
 class Material(models.Model):
     item = models.CharField(primary_key=True, max_length=199)
