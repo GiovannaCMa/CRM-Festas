@@ -78,7 +78,6 @@ h1{
     width: 200px;
     background-color: var(--cor-container);
 }
-/* ...existing code... */
 .painel_form button {
   background-color: var(--cor-container);
   color: #ffffff;
@@ -99,5 +98,3 @@ h1{
   transform: translateY(-3px); 
   box-shadow: 0 6px 18px rgba(71,22,81,0.12);
 }
-/* ...existing code... */
-
