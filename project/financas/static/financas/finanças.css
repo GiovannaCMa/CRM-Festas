@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+  --cor-primaria: #471651;
+  --roxo: #693a7d;
+  --roxo-claro: #ede4ef;
+  --branco: #ffffff;
+  --cinza: #ddd;
+  --back-color: #f1e9f2;
+  --text-color: #3f1947;
+}
+
+body {
+  background-color: var(--back-color);
+  color: var(--text-color);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 260px;
+  background-color: var(--cor-primaria);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 24px;
+  color: #fff;
+}
+
+.logo img {
+  width: 60px;
+  margin-bottom: 32px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ddd;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #5A1A85;
+  color: #fff;
+}
+
+.menu-item.active {
+  background-color: #5A1A85;
+  color: #fff;
+  border-left: 4px solid #fff;
+  padding-left: 8px;
+}
+
+.logout {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+}
+
+.logout a {
+  color: #ddd;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s;
+}
+
+.logout a:hover {
+  color: #fff;
+}
+
+/* ===== MAIN ===== */
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+/* ===== PAINEL ===== */
+.painel-financeiro {
+  background-color: var(--branco);
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.painel-financeiro h2 {
+  font-size: 22px;
+  color: var(--roxo-escuro);
+  margin-bottom: 24px;
+}
+
+/* ===== TOP ===== */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.resumo {
+  display: flex;
+  gap: 24px;
+  background-color: var(--roxo-claro);
+  padding: 16px 24px;
+  border-radius: 10px;
+}
+
+.resumo h4 {
+  font-size: 14px;
+  color: var(--roxo-escuro);
+}
+
+.resumo p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.saldo {
+  background-color: var(--roxo-claro);
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.saldo h4 {
+  font-size: 14px;
+  color: var(--cor-primaria);
+}
+
+.saldo p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nova-transacao {
+  background-color: var(--cor-primaria);
+  color: var(--branco);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nova-transacao:hover {
+  background-color: var(--roxo);
+}
+
+/* ===== FORM ===== */
+.form-transacao {
+  background-color: var(--roxo-claro);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  animation: aparecer 0.3s ease;
+}
+
+.escondido {
+  display: none;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-transacao h3 {
+  margin-bottom: 10px;
+  color: var(--roxo-escuro);
+}
+
+label {
+  font-weight: 600;
+  color: var(--cor-primaria);
+  margin-bottom: 4px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--cinza);
+  margin-bottom: 10px;
+}
+
+.linha {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-aplicar {
+  background-color: var(--cor-primaria);
+  color: var(--branco);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-aplicar:hover {
+  background-color: var(--roxo);
+}
+
+/* ===== TABELA ===== */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  background-color: var(--roxo-claro);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabela thead {
+  background-color: #e4d7e8;
+  text-align: left;
+}
+
+.tabela th,
+.tabela td {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.tabela tbody tr:nth-child(even) {
+  background-color: #f7f2f8;
+}

@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('forum.urls')),  # '' significa que não terá prefixo
+    path('financas/', include('financas.urls')),
 ]
 
 

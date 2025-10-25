@@ -13,11 +13,11 @@
     <!-- side bar -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="logo.png" alt="Logo do sistema"> <!-- imagem do logo '0' -->
+        <img src="logo.png" alt="Logo do sistema"> 
       </div>
 
       <nav class="menu">
-        <a href="home.html" class="menu-item">
+        <a href="/nav-bar/home.html" class="menu-item">
             <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
           <span>Principal</span>
         </a>
@@ -60,14 +60,9 @@
     </div>
 
     <main class="main">
-      <div class="titulo">
-       
-       
-      </div>
-
       <div class="filtros-container">
         <div class="campo">
-          <label for="pesquisar">Pesquisar</label>
+          <label for="pesquisar" >Pesquisar</label>
           <div class="input-icon">
             <input type="text" id="pesquisar" placeholder="Pesquisar o cód, nome, categoria...">
           </div>
@@ -99,7 +94,7 @@
     <button>limpar</button>
  </div>
     </main>
-     <div class="tabela-clientes">
+     <div class="tabela-clientes" >
     <table>
         <thead>
             <tr>
@@ -130,6 +125,6 @@
   <script>
     lucide.createIcons();
   </script>
-  <script src="assets/nav.js"></script>
+ <script src="{% static 'forum/nav.js' %}"></script>
 </body>
 </html>

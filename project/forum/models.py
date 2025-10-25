@@ -82,6 +82,12 @@ class Cliente(models.Model):
     email = models.EmailField(unique=True)
     telefone = models.CharField(max_length=20)
 
+    situacao = models.CharField(
+        max_length=15,
+        choices=[('ativa', 'Ativa'), ('desativado', 'Desativado')],
+        default='ativo'
+    )
+
     def _str_(self):
         return self.nome
     
@@ -135,6 +141,7 @@ class Festa(models.Model):
     data = models.DateField()
     local = models.CharField(max_length=150)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    preco = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def _str_(self):
         return self.nome_festa
