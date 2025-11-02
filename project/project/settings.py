@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'login',
     'financas',
     'forum.apps.ForumConfig',
     'django.contrib.admin',

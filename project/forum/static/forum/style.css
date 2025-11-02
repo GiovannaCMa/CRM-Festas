@@ -14,7 +14,7 @@
 }
 
 body {
-  background-color: var(--back-color);
+  background-color: #f1e9f2;
   color: var(--text-color);
 }
 
@@ -88,6 +88,13 @@ body {
 .main {
   flex: 1;
   
+}
+
+section {
+  background-color: var(--branco);
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Estilo geral da página */
