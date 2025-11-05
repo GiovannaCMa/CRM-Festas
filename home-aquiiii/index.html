@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Festas</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- side bar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo do sistema"> <!-- imagem do logo '0' -->
+      </div>
+
+      <nav class="menu">
+        <a href="#" class="menu-item active">
+            <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
+          <span>Principal</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="shopping-bag"></i>
+          <span>Pedidos</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="users"></i>
+          <span>Clientes</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="package"></i>
+          <span>Itens</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="truck"></i>
+          <span>Logística</span>
+        </a>
+        <a href="#" class="menu-item">
+          <i data-lucide="wallet"></i>
+          <span>Financeiro</span>
+        </a>
+      </nav>
+
+      <div class="logout">
+        <a href="#">
+          <i data-lucide="log-out"></i>
+          <span>Sair</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <h1>Bem-vindo de volta, NOME!</h1>
+
+       <section class="cards">
+        <div class="card">
+          <span>👤</span>
+          <p>23.00</p>
+          <small>Total de Serviços</small>
+        </div>
+        <div class="card">
+          <span>🛍️</span>
+          <p>12.987</p>
+          <small>Total de Produtos</small>
+        </div>
+        <div class="card">
+          <span>💰</span>
+          <p>R$29.000</p>
+          <small>Total de Lucros</small>
+        </div>
+      </section>
+
+      <div class="grid">
+        <section class="calendar">
+          <h2>Calendário</h2>
+          <div class="calendar-box">
+            <div class="calendar" id="calendar"></div>
+          </div>
+        </section>
+
+        <section class="events">
+          <h2>Eventos</h2>
+          <div class="event"><p>Evento Glinda — 27/10 — 14:00</p></div>
+          <div class="event"><p>Evento Glinda — 27/10 — 14:00</p></div>
+          <div class="event"><p>Evento Glinda — 27/10 — 14:00</p></div>
+        </section>
+      </div>
+
+      <section class="list">
+        <h2>Lista</h2>
+        <label><input type="checkbox"> Comprar mesa para festa</label>
+        <label><input type="checkbox"> Comprar tecido</label>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="assets/script.js"></script>
+</body>
+</html>
