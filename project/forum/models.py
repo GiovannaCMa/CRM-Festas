@@ -146,18 +146,22 @@ class Festa(models.Model):
     def _str_(self):
         return self.nome_festa
 
+
+
 class Material(models.Model):
-    item = models.CharField(primary_key=True, max_length=199)
+    nome_item = models.CharField(max_length=199, default='SemNome')
     quant = models.DecimalField(max_digits=10, decimal_places=0)
 
-    class Meta:
-        managed = False
-        db_table = 'material'
+    def _str_(self):
+        return self.nome_item
+
+
 
 
 class Temas(models.Model):
-    nome = models.CharField(max_length=199, blank=True, null=True)
+    nome_tema = models.CharField(max_length=199, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'temas'
+    def _str_(self):
+        return self.nome_tema
+
+       
