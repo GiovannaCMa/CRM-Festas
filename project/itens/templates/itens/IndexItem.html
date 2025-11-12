@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página de Itens</title>
+   {% load static %} 
+    <link rel="stylesheet" href="{% static 'itens/styleItem.css' %}">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- side bar -->
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="Logo do sistema" />
+          <!-- imagem do logo '0' -->
+        </div>
+
+        <nav class="menu">
+          <a href="#" class="menu-item">
+            <i data-lucide="home"></i>
+            <span>Principal</span>
+          </a>
+          <a href="#" class="menu-item">
+            <i data-lucide="file-text"></i>
+            <span>Contrato</span>
+          </a>
+          <a href="#" class="menu-item">
+            <i data-lucide="users"></i>
+            <span>Clientes</span>
+          </a>
+          <a href="#" class="menu-item active">
+            <i data-lucide="package"></i>
+            <span>Itens</span>
+          </a>
+          <a href="#" class="menu-item">
+            <i data-lucide="truck"></i>
+            <span>Logística</span>
+          </a>
+          <a href="#" class="menu-item">
+            <i data-lucide="wallet"></i>
+            <span>Financeiro</span>
+          </a>
+        </nav>
+
+        <div class="logout">
+          <a href="#">
+            <i data-lucide="log-out"></i>
+            <span>Sair</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Área de conteúdo principal -->
+      <main class="main-content">
+        <div class="content-header">
+          <h1>Itens</h1>
+        </div>
+
+        <!-- Container unificado -->
+        <div class="unified-container">
+          <div class="textos-de-cima">
+            <div class="Pesquisar">Pesquisar</div>
+          </div>
+          <div class="search-row">
+            <div class="search-field">
+              <input
+                type="text"
+                placeholder="Pesquisar o código, nome, categoria..."
+              />
+              <i class="search-icon" data-lucide="search"></i>
+            </div>
+          </div>
+          <div class="search-row">
+            <div class="action-button1">
+              <button class="btn-primary">Aplicar</button>
+            </div>
+            <div class="action-button2">
+              <button class="btn-secondary">Limpar</button>
+            </div>
+          </div>
+
+          <div class="dropdown-fields">
+            <div class="dropdown-field-word1">Ordenar por :</div>
+            <div class="dropdown-field1">
+              <button class="order-button" type="button">
+                Nenhum selecionado
+              </button>
+              <i data-lucide="chevron-down"></i>
+              <div class="order-menu" aria-hidden="true">
+                <label
+                  ><input type="radio" name="order" value="name" /><span
+                    >Nome</span
+                  ></label
+                >
+                <label
+                  ><input type="radio" name="order" value="date" /><span
+                    >Data</span
+                  ></label
+                >
+                <label
+                  ><input type="radio" name="order" value="color" /><span
+                    >Cor</span
+                  ></label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="linha-horizontal-cinza"></div>
+
+          <div class="itens-container">
+            <div class="item-name-container">
+              <div class="item-name-item"><h2>ID</h2></div>
+              <div class="item-name-estoque"><h2>Material</h2></div>
+              <div class="item-name-preco"><h2>Quantidade</h2></div>
+            </div>
+            <div class="item-row" id="item-original">
+            
+                </div>
+
+                {% for material in materiais %}
+                <div class="item-info">
+                  <div class="col">{{ material.id }}</div>
+                  <div class="col">{{ material.item }}</div>
+                  <div class="col">{{ material.quant }}</div>
+                </div>
+                {% endfor %}
+              </div>
+
+          </div>
+        </div>
+      </main>
+
+    <script>
+      lucide.createIcons();
+
+      // Função para adicionar um novo item ao clicar no botão "Aplicar"
+      document.addEventListener("DOMContentLoaded", function () {
+        const btnApply = document.querySelector(".btn-primary");
+        const btnLimpar = document.querySelector(".btn-secondary");
+        const itensContainer = document.querySelector(".itens-container");
+
+        // Dropdown de ordenação
+        const dropdown = document.querySelector(".dropdown-field1");
+        const orderButton = dropdown
+          ? dropdown.querySelector(".order-button")
+          : null;
+        const orderMenu = dropdown
+          ? dropdown.querySelector(".order-menu")
+          : null;
+        const radios = dropdown
+          ? dropdown.querySelectorAll(".order-menu input[type='radio']")
+          : [];
+
+        if (dropdown && orderButton && orderMenu) {
+          // Abrir/fechar somente ao clicar no botão
+          orderButton.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const willOpen = !dropdown.classList.contains("open");
+            dropdown.classList.toggle("open", willOpen);
+            orderButton.setAttribute("aria-expanded", String(willOpen));
+          });
+
+          // Tornar toda a área da dropdown clicável (exceto o menu)
+          dropdown.addEventListener("click", function (e) {
+            if (orderMenu.contains(e.target)) return; // não propaga para o botão ao clicar dentro do menu
+            if (e.target === orderButton) return; // já tratado acima
+            e.stopPropagation();
+            orderButton.click();
+          });
+
+          // Evitar que cliques dentro do menu fechem ao borbulhar
+          orderMenu.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+
+          // Seleção de opção: atualiza texto do botão e fecha
+          radios.forEach(function (radio) {
+            radio.addEventListener("change", function () {
+              const selectedLabel = radio.closest("label");
+              if (selectedLabel && orderButton) {
+                orderButton.textContent = selectedLabel.textContent.trim();
+              }
+              dropdown.classList.remove("open");
+              orderButton.setAttribute("aria-expanded", "false");
+            });
+          });
+
+          // Fechar ao clicar fora
+          document.addEventListener("click", function () {
+            dropdown.classList.remove("open");
+            if (orderButton) orderButton.setAttribute("aria-expanded", "false");
+          });
+        }
+
+        // Função para adicionar item
+        if (btnApply && itensContainer) {
+          btnApply.addEventListener("click", function () {
+            // Pegar o item original (modelo)
+            const itemOriginal = document.getElementById("item-original");
+
+            if (itemOriginal) {
+              // Verificar se já existe pelo menos um item adicionado
+              const itensExistentes = itensContainer.querySelectorAll(
+                ".item-row:not(#item-original)"
+              );
+
+              // Se já existir pelo menos um item, adicionar linha divisória
+              if (itensExistentes.length > 0) {
+                const linhaDivisoria = document.createElement("div");
+                linhaDivisoria.className = "linha-horizontal-cinza";
+                itensContainer.appendChild(linhaDivisoria);
+              }
+
+              const novoItem = itemOriginal.cloneNode(true);
+              // Remover o ID do novo item para não ter duplicatas
+              novoItem.removeAttribute("id");
+              // Forçar o display para block explicitamente
+              novoItem.style.display = "";
+              // Remover a borda inferior do item-row
+              novoItem.style.borderBottom = "none";
+
+              // Adicionar o novo item
+              itensContainer.appendChild(novoItem);
+
+              // Re-inicializar os ícones do Lucide para o novo item
+              lucide.createIcons();
+            }
+          });
+        }
+
+        // Função para limpar todos os itens
+        if (btnLimpar && itensContainer) {
+          btnLimpar.addEventListener("click", function () {
+            // Encontrar todos os itens e linhas divisórias (exceto o item original)
+            const todasAsLinhas = itensContainer.querySelectorAll(
+              ".linha-horizontal-cinza"
+            );
+            const todosOsItens = itensContainer.querySelectorAll(
+              ".item-row:not(#item-original)"
+            );
+
+            // Remover todas as linhas divisórias
+            todasAsLinhas.forEach(function (linha) {
+              linha.remove();
+            });
+
+            // Remover todos os itens adicionados
+            todosOsItens.forEach(function (item) {
+              item.remove();
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

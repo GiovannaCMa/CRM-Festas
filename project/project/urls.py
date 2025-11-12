@@ -19,9 +19,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('forum.urls')),  # '' significa que não terá prefixo
+    path('home/', include('home.urls')),  # '' significa que não terá prefixo
     path('financas/', include('financas.urls')),
     path('login/', include('login.urls')),
+    path('clientes/', include('forum.urls')),
+    path('', include('itens.urls')),
 ]
 
 

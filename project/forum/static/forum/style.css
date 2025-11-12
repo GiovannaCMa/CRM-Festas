@@ -92,7 +92,7 @@ body {
 
 section {
   background-color: var(--branco);
-  padding: 32px;
+  margin-left: 30px;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
@@ -238,4 +238,80 @@ tbody td {
     background-color: var(--cor-primaria);
     color: var(--back-color);
     margin-top: 10px;
+}
+/* ===== CONTAINER PRINCIPAL ===== */
+.main {
+  flex: 1;
+  padding: 40px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+/* ===== CAMPOS DO FORMULÁRIO ===== */
+form{
+  align-items: center;
+}
+form p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+form label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form input:focus,
+form select:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+  outline: none;
+}
+
+/* ===== BOTÃO ===== */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #43a047;
 }

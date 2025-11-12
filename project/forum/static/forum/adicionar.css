@@ -1,3 +1,257 @@
-h1{
-    font-size: 12px;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+
+:root {
+    --cor-primaria: #471651;
+    --back-color: #F1E9F2;
+    --text-color: #3F1947;
+    --btn-hover: #5A1A85;
+    --gray-light: #e0e0e0;
+    --white: #ffffff;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+
+body {
+    background-color: var(--back-color);
+    color: var(--text-color);
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+
+.sidebar {
+    width: 260px;
+    background-color: var(--cor-primaria);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 24px;
+    color: var(--white);
+}
+
+.logo img {
+    width: 60px;
+    margin-bottom: 32px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ddd;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.menu-item:hover {
+    background-color: var(--btn-hover);
+    color: var(--white);
+}
+
+.menu-item.active {
+    background-color: var(--btn-hover);
+    color: var(--white);
+    border-left: 4px solid var(--white);
+    padding-left: 8px;
+}
+
+.logout {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+}
+
+.logout a {
+    color: #ddd;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s;
+}
+
+.logout a:hover {
+    color: var(--white);
+}
+
+
+.content-area {
+    flex: 1;
+    padding: 32px 48px;
+    overflow-y: auto;
+}
+
+h1 {
+    color: var(--text-color);
+    margin-bottom: 5px;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    margin-bottom: 30px;
+    color: #666;
+    font-weight: 400;
+}
+
+.form-container {
+    max-width: 900px;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+.form-fields {
+    display: grid;
+    gap: 20px 30px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    margin-bottom: 30px;
+}
+
+.campo.full-width {
+    grid-column: 1 / -1;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    background-color: #fcfcfc;
+    color: #333;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #aaa;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(71, 22, 81, 0.1);
+}
+
+.campo textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-top: 20px;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--cor-primaria);
+    color: var(--back-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn-secondary {
+    background-color: var(--gray-light);
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+    background-color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content-area {
+        padding: 20px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .form-fields {
+
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 15px;
+    color: #333;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus {
+  border-color: #471651;
+  box-shadow: 0 0 4px rgba(71, 22, 81, 0.3);
+  outline: none;
 }

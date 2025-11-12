@@ -18,9 +18,8 @@ btn.addEventListener('click', (e) => {
   const senhaValor = (senhaInput.value || '').trim();
 
   if (emailValor === usuario.email.toLowerCase() && senhaValor === usuario.senha) {
-    window.location.href = '../../finanças/financas.html';
+    window.location.href = '/home/';
   } else {
     alert('Email e/ou senha incorreto');
   }
 });
-// ...existing code...

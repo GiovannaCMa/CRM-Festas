@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRM Festas</title>
   {% load static %} 
-  <link rel="stylesheet" href="{% static "forum/style.css" %}">
+  <link rel="stylesheet" href="{% static 'forum/style.css' %}">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -17,22 +17,22 @@
       </div>
 
       <nav class="menu">
-        <a href="/nav-bar/home.html" class="menu-item">
+        <a href="{% url 'home' %}" class="menu-item">
             <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
           <span>Principal</span>
         </a>
-        <a href="#" class="menu-item">
-          <i data-lucide="shopping-bag"></i>
-          <span>Pedidos</span>
+        <a href="{% url 'lista_clientes' %}" class="menu-item">
+          <i data-lucide="file-text"></i>
+          <span>Contrato</span>
         </a>
-        <a href=""{% url 'lista_clientes' %}"" class="menu-item">
+        <a href="{% url 'lista_clientes' %}" class="menu-item">
           <i data-lucide="users"></i>
           <span>Clientes</span>
         </a>
-        <a href="" class="menu-item">
+          <a href="{% url 'listar_itens' %}" class="menu-item">
           <i data-lucide="package"></i>
           <span>Itens</span>
-        </a>
+          </a>
         <a href="#" class="menu-item">
           <i data-lucide="truck"></i>
           <span>Logística</span>
@@ -66,51 +66,42 @@
           </div>
         </div>
      
-
- <div class="situacao">
-     <div class="campo">
-            <label for="tipo">Situação</label>
-            <select id="tipo">
-                <option value="">pesquisar a categoria...</option>
-                <option value="inadimplente">inadimplente</option>
-                <option value="adimplente">adimplente</option>
-            </select>
-        </div>
- </div>
  <div class="botoes">
     <button>aplicar</button>
     <button>limpar</button>
  </div>
     </main>
-     <div class="tabela-clientes" >
-    <table>
-        <thead>
-            <tr>
-                <th>Nome/Razão Social</th>
-                <th>Telefone</th>
-                <th>E-mail</th>
-                <th>Situação</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cliente in clientes %}
-            <tr>
-                <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.telefone }}</td>
-                <td>{{ cliente.email }}</td>
-                <td>Ativo</td> <!-- você pode personalizar a Situação -->
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="4">Nenhum cliente encontrado.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+   <div class="tabela-clientes">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome/Razão Social</th>
+        <th>Telefone</th>
+        <th>E-mail</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cliente in clientes %}
+      <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>Ativo</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">Nenhum cliente encontrado.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Botão bem posicionado -->
+  <div class="botoes">
+    <button onclick="window.location.href='/clientes/adicionar/'">Novo</button>
+  </div>
 </div>
-  </section>
-    </main>
-  
   </div>
 
   <script>

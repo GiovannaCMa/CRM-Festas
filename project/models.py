@@ -149,7 +149,7 @@ class Material(models.Model):
     quant = models.DecimalField(max_digits=10, decimal_places=0)
 
     class Meta:
-        managed = False
+
         db_table = 'material'
 
 
@@ -157,5 +157,4 @@ class Temas(models.Model):
     nome = models.CharField(max_length=199, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'temas'
