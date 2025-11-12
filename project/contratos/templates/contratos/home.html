@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedidos</title>
+{%load static %}
+<link rel="stylesheet" href="{% static 'contratos/nav.css' %}">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div class="container">
+  <!-- side bar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo do sistema"> <!-- imagem do logo '0' -->
+    </div>
+
+
+
+
+    <nav class="menu">
+      <a href="home.html" class="menu-item">
+          <i data-lucide="home"></i>
+        <span>Principal</span>
+      </a>
+      <a href="#" class="menu-item active">
+        <i data-lucide="shopping-bag"></i>
+        <span>Contratos</span>
+      </a>
+      <a href="#" class="menu-item">
+        <i data-lucide="users"></i>
+        <span>Clientes</span>
+      </a>
+      <a href="#" class="menu-item">
+        <i data-lucide="package"></i>
+        <span>Itens</span>
+      </a>
+      <a href="#" class="menu-item">
+        <i data-lucide="wallet"></i>
+        <span>Financeiro</span>
+      </a>
+    </nav>
+<div class="logout">
+      <a href="#">
+          <i data-lucide="log-out"></i>
+          <span>Sair</span>
+        </a>
+      </div>
+    </aside> 
+    <main class="main">
+      <div class="headerPedido">
+        <h1 class="idPedido">Contrato #235009/001</h1>
+      </div>
+
+      <div class="containerBranco">
+        <!-- Barra de Progresso -->
+        <div class="progressBar">
+          <div class="progressStep completed">
+            <i data-lucide="check-circle"></i>
+            <span class="stepLabel">Orçamento</span>
+            <span class="stepDate">18/10</span>
+          </div>
+          <div class="progressLine completed"></div>
+          <div class="progressStep completed">
+            <i data-lucide="check-circle"></i>
+            <span class="stepLabel">Data Limite</span>
+            <span class="stepDate">22/10</span>
+          </div>
+          <div class="progressLine"></div>
+          <div class="progressStep">
+            <i data-lucide="circle"></i>
+            <span class="stepLabel">Concluído</span>
+            <span class="stepDate"></span>
+          </div>
+        </div>
+        <button class="prosseguir">Prosseguir</button>
+        <div class="linhaCinza"></div>
+
+        <!-- Informações Gerais -->
+        <div class="infoPedido">
+          <h3>Informações gerais</h3>
+          <div class="infoGrid">
+            <div class="infoItem">
+              <p class="infoLabel">Cliente:</p>
+          <p class="infoValue">Bianca Noberto Pereira Alves</p>
+          </div>
+          <div class="infoItem">
+            <p class="infoLabel">Telefone:</p>
+            <p class="infoValue">(XX)X XXXX-XXXX</p>
+          </div>
+          <div class="infoItem">
+            <p class="infoLabel">E-mail:</p>
+            <p class="infoValue">bianca@gmail.com</p>
+          </div>
+        </div>
+      </div>
+      <!-- Pedidos do Cliente -->
+      <div class="pedidoCliente">
+        <h3 class="textopd">Festa do cliente</h3>
+        <div class="linhaCinza"></div>
+        <div class="pedidoItem">
+          <span class="pedidoNome">Tema:</span>
+          <span class="pedidoPreco">Wicked</span>
+        </div>
+        <div class="linhaCinza"></div>
+        <div class="pedidoItem">
+          <span class="pedidoNome">Local:</span>
+        <span class="pedidoPreco">Avenida severino massa spineli</span>
+        </div>
+        <div class="linhaCinza"></div>
+        <div class="valorTotal">
+          <span>Valor Total:</span>
+          <span class="totalPreco">R$ 300,00</span>
+        </div>
+      </div>
+  </main>
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  });
+</script>
+
+
+<script>
+  (function () {
+    var button = document.querySelector('.prosseguir');
+    var steps = Array.prototype.slice.call(document.querySelectorAll('.progressBar .progressStep'));
+    var lines = Array.prototype.slice.call(document.querySelectorAll('.progressBar .progressLine'));
+    var currentIndex = 0;
+    var clickCount = 0;
+
+
+    if (!button || steps.length === 0) return;
+
+
+     // Cores originais
+    var originalColors = {
+      icon: '#999',
+      label: '#3f1947',
+      date: '#666',
+      line: '#e5e5e5'
+    };
+
+
+     // Garante que a primeira linha comece cinza
+    if (lines[0]) {
+      lines[0].style.backgroundColor = originalColors.line;
+      lines[0].classList.remove('completed');
+    }
+
+
+    function resetAllSteps() {
+      steps.forEach(function(step) {
+        step.style.color = '';
+        var svg = step.querySelector('svg');
+        if (svg) {
+          svg.style.stroke = originalColors.icon;
+        }
+        var label = step.querySelector('.stepLabel');
+        if (label) {
+          label.style.color = originalColors.label;
+        }
+        var date = step.querySelector('.stepDate');
+        if (date) {
+        date.style.color = originalColors.date;
+      }
+      });
+      
+      lines.forEach(function(line) {
+        line.style.backgroundColor = originalColors.line;
+        line.classList.remove('completed');
+      });
+    }
+
+
+    function makeStepGreen(step) {
+      step.style.color = '#16a34a';
+      var svg = step.querySelector('svg');
+      if (svg) {
+        svg.style.stroke = '#16a34a';
+      }
+      var label = step.querySelector('.stepLabel');
+      if (label) {
+      label.style.color = '#16a34a';
+      }
+      var date = step.querySelector('.stepDate');
+      if (date) {
+        date.style.color = '#16a34a';
+      }
+    }
+
+
+    function makeLineGreen(line) {
+    line.style.backgroundColor = '#16a34a';
+    }
+
+
+    button.addEventListener('click', function () {
+      clickCount += 1;
+
+
+       // No 4º clique, reseta tudo e reinicia
+      if (clickCount === 4) {
+        resetAllSteps();
+        currentIndex = 0;
+        clickCount = 0;
+      return;
+      }
+
+
+       // Clique 1: primeiro step fica verde
+       // Clique 2: primeira linha + segundo step ficam verdes
+       // Clique 3: segunda linha + terceiro step ficam verdes
+      if (currentIndex < steps.length) {
+         // Pinta o step atual
+        makeStepGreen(steps[currentIndex]);
+        
+         // Se não é o primeiro step, pinta a linha anterior
+        if (currentIndex > 0 && lines[currentIndex - 1]) {
+          makeLineGreen(lines[currentIndex - 1]);
+        }
+        
+        currentIndex += 1;
+      }
+    });
+  })();
+</script>
+
+
+</body>
+</html>

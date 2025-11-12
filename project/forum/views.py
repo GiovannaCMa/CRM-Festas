@@ -5,10 +5,22 @@ from .forms import ClienteForm
 def home(request):
     return render(request, 'index.html')
 
-def lista_clientes(request):
-    clientes = Cliente.objects.all()  # pega todos os clientes do banco
-    return render(request, 'index.html', {'clientes': clientes})
 
+def lista_clientes(request):
+    termo_pesquisa = request.GET.get('pesquisar', '')  # pega o valor digitado
+
+    if termo_pesquisa:
+        clientes = Cliente.objects.filter(
+            nome__icontains=termo_pesquisa
+        ) | Cliente.objects.filter(
+            email__icontains=termo_pesquisa
+        ) | Cliente.objects.filter(
+            telefone__icontains=termo_pesquisa
+        )
+    else:
+        clientes = Cliente.objects.all()  # mostra todos se não tiver filtro
+
+    return render(request, 'index.html', {'clientes': clientes})
 
 def adicionar_cliente(request):
     if request.method == 'POST':

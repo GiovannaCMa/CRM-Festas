@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'login',
     'financas',
     'home',
+    'contratos',
     'forum.apps.ForumConfig',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -59,15 +59,16 @@
     <section class="painel">
     <main class="main">
       <div class="filtros-container">
+       <form method="get" class="filtros-container">
         <div class="campo">
           <label for="pesquisar" >Pesquisar</label>
           <div class="input-icon">
-            <input type="text" id="pesquisar" placeholder="Pesquisar o cód, nome, categoria...">
+            <input type="text" id="pesquisar" placeholder="Pesquisar o cód, nome, categoria..." value="{{ request.GET.pesquisar }}" name="pesquisar">
           </div>
         </div>
      
  <div class="botoes">
-    <button>aplicar</button>
+    <button >aplicar</button>
     <button>limpar</button>
  </div>
     </main>

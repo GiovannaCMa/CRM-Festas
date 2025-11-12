@@ -1,5 +1,5 @@
 
-      // Função para adicionar um novo item ao clicar no botão "Aplicar"
+      // conexao com o html
       document.addEventListener("DOMContentLoaded", function () {
         const btnApply = document.querySelector(".btn-primary");
         const btnLimpar = document.querySelector(".btn-secondary");
