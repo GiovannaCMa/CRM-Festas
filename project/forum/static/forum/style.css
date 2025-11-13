@@ -155,7 +155,7 @@ tbody td {
   align-items: flex-start;
   gap: 40px;
   background-color: transparent;
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: 70px;
 }
 
@@ -242,7 +242,7 @@ tbody td {
 /* ===== CONTAINER PRINCIPAL ===== */
 .main {
   flex: 1;
-  padding: 40px;
+  padding: 10px;
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;
@@ -303,10 +303,10 @@ button[type="submit"] {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
   font-size: 16px;
   font-weight: 500;
   transition: background-color 0.2s;
@@ -315,3 +315,4 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #43a047;
 }
+

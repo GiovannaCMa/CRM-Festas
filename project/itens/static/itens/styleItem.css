@@ -136,11 +136,11 @@ i[data-lucide] {
   justify-content: center;
 }
 
-.search-row:first-of-type {
+.search-row first-of-type {
   margin-top: 40px;
 }
 
-.search-row:last-of-type {
+.search-row last-of-type {
   margin-bottom: 50px;
 }
 

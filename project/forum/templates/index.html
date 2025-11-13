@@ -13,7 +13,7 @@
     <!-- side bar -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="logo.png" alt="Logo do sistema"> 
+        <img src="{% static 'forum/img/logobranca.png' %}">
       </div>
 
       <nav class="menu">
@@ -21,7 +21,7 @@
             <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
           <span>Principal</span>
         </a>
-        <a href="{% url 'lista_clientes' %}" class="menu-item">
+        <a href="{% url 'contratos' %}" class="menu-item">
           <i data-lucide="file-text"></i>
           <span>Contrato</span>
         </a>
@@ -33,10 +33,7 @@
           <i data-lucide="package"></i>
           <span>Itens</span>
           </a>
-        <a href="#" class="menu-item">
-          <i data-lucide="truck"></i>
-          <span>Logística</span>
-        </a>
+  
         <a href="{% url 'painel_financeiro' %}"  class="menu-item">
           <i data-lucide="wallet"></i>
           <span>Financeiro</span>
@@ -66,10 +63,9 @@
             <input type="text" id="pesquisar" placeholder="Pesquisar o cód, nome, categoria..." value="{{ request.GET.pesquisar }}" name="pesquisar">
           </div>
         </div>
-     
  <div class="botoes">
-    <button >aplicar</button>
-    <button>limpar</button>
+    <button type="submit">aplicar</button>
+    <button type="submit">limpar</button>
  </div>
     </main>
    <div class="tabela-clientes">
@@ -100,7 +96,7 @@
 
   <!-- Botão bem posicionado -->
   <div class="botoes">
-    <button onclick="window.location.href='/clientes/adicionar/'">Novo</button>
+   <button onclick="window.location.href='adicionar/'">Novo</button>
   </div>
 </div>
   </div>

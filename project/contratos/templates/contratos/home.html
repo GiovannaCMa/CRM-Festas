@@ -13,18 +13,18 @@
   <!-- side bar -->
   <aside class="sidebar">
     <div class="logo">
-      <img src="logo.png" alt="Logo do sistema"> <!-- imagem do logo '0' -->
+       <img src="{% static 'contratos/img/logobranca.png' %}"><!-- imagem do logo '0' -->
     </div>
 
 
 
 
     <nav class="menu">
-      <a href="home.html" class="menu-item">
+      <a href="{% url 'home' %}" class="menu-item">
           <i data-lucide="home"></i>
         <span>Principal</span>
       </a>
-      <a href="#" class="menu-item active">
+       <a href="{% url 'contratos' %}"class="menu-item active">
         <i data-lucide="shopping-bag"></i>
         <span>Contratos</span>
       </a>
