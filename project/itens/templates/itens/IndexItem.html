@@ -58,23 +58,20 @@
         </div>
 
         <!-- Container unificado -->
+      <form method="get" action="{% url 'listar_itens' %}" class="search-form">
         <div class="unified-container">
           <div class="textos-de-cima">
             <div class="Pesquisar" >Pesquisar</div>
           </div>
           <div class="search-row">
             <div class="search-field">
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Pesquisar o código, nome, categoria..."
-              />
+             <input type="text" id="pesquisar" placeholder="Pesquisar o cód, nome, categoria..." value="{{ request.GET.pesquisar }}" name="pesquisar">
               <i class="search-icon" data-lucide="search"></i>
             </div>
           </div>
           <div class="search-row">
             <div class="action-button1">
-              <button class="btn-primary">Aplicar</button>
+              <button class="btn-primary" type="submit">Aplicar</button>
             </div>
             <div class="action-button2">
               <button class="btn-secondary">Limpar</button>
@@ -130,6 +127,7 @@
               </div>
 
           </div>
+          </form>
         </div>
       </main>
 
