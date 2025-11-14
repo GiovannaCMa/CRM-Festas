@@ -17,15 +17,17 @@
           <!-- imagem do logo '0' -->
         </div>
 
-        <nav class="menu">
-          <a href="{% url 'home' %}" class="menu-item">
-            <i data-lucide="home"></i>
-            <span>Principal</span>
-          </a>
-          <a href="{% url 'contratos' %}"class="menu-item">
+        
+      <nav class="menu">
+        <a href="{% url 'home' %}" class="menu-item active">
+            <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
+          <span>Principal</span>
+        </a>
+        <a href="{% url 'contratos' %}" class="menu-item">
             <i data-lucide="file-text"></i>
             <span>Contrato</span>
           </a>
+
           <a href="{% url 'lista_clientes' %}" class="menu-item">
             <i data-lucide="users"></i>
             <span>Clientes</span>
@@ -39,6 +41,7 @@
             <span>Financeiro</span>
           </a>
         </nav>
+
 
         <div class="logout">
           <a href="#">
