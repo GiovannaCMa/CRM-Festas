@@ -226,6 +226,24 @@ tbody td {
   border-bottom: 1px solid #eee;
 }
 
+.cliente-row {
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.cliente-row:hover {
+  background-color: #f8f1fa;
+}
+
+.cliente-row:active {
+  transform: scale(0.997);
+}
+
+.cliente-link {
+  font-weight: 600;
+  color: inherit;
+}
+
 .tabela-clientes tr:hover td {
   background-color: #f8f1fa;
 }

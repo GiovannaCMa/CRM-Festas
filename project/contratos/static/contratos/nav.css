@@ -324,6 +324,13 @@ body {
   color: var(--text-color);
 }
 
+.sem-festa {
+  font-size: 14px;
+  color: #3f1947;
+  opacity: 0.8;
+  margin: 10px 0;
+}
+
 .linhaCinza {
   width: 100%;
   height: 3px;

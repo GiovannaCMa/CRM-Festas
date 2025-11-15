@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{% static 'contratos/nav.css' %}">
 <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body data-section="contratos">
 <div class="container">
   <!-- side bar -->
   <aside class="sidebar">
@@ -17,23 +17,23 @@
     </div>
 
     <nav class="menu">
-      <a href="{% url 'home' %}" class="menu-item">
+      <a href="{% url 'home' %}" class="menu-item" data-section="home">
           <i data-lucide="home"></i>
         <span>Principal</span>
       </a>
-       <a href="{% url 'contratos' %}"class="menu-item active">
+       <a href="{% url 'contratos' %}"class="menu-item active" data-section="contratos">
          <i data-lucide="file-text"></i>
         <span>Contratos</span>
       </a>
-      <a href="{% url 'lista_clientes' %}" class="menu-item">
+      <a href="{% url 'lista_clientes' %}" class="menu-item" data-section="clientes">
         <i data-lucide="users"></i>
         <span>Clientes</span>
       </a>
-      <a href="{% url 'listar_itens' %}" class="menu-item">
+      <a href="{% url 'listar_itens' %}" class="menu-item" data-section="itens">
         <i data-lucide="package"></i>
         <span>Itens</span>
       </a>
-      <a href="{% url 'painel_financeiro' %}" class="menu-item">
+      <a href="{% url 'painel_financeiro' %}" class="menu-item" data-section="financas">
         <i data-lucide="wallet"></i>
         <span>Financeiro</span>
       </a>
@@ -49,7 +49,13 @@
     </aside> 
     <main class="main">
       <div class="headerPedido">
-        <h1 class="idPedido">Contrato #235009/001</h1>
+        <h1 class="idPedido">
+          {% if cliente %}
+            Contrato · {{ cliente.nome }}
+          {% else %}
+            Contratos
+          {% endif %}
+        </h1>
       </div>
 
       <div class="containerBranco">
@@ -80,17 +86,35 @@
         <div class="infoPedido">
           <h3>Informações gerais</h3>
           <div class="infoGrid">
-            <div class="infoItem">
-              <p class="infoLabel">Cliente:</p>
-          <p class="infoValue">Bianca Noberto Pereira Alves</p>
+          <div class="infoItem">
+            <p class="infoLabel">Cliente:</p>
+            <p class="infoValue">
+              {% if cliente %}
+                {{ cliente.nome }}
+              {% else %}
+                Selecione um cliente na tela anterior
+              {% endif %}
+            </p>
           </div>
           <div class="infoItem">
             <p class="infoLabel">Telefone:</p>
-            <p class="infoValue">(XX)X XXXX-XXXX</p>
+            <p class="infoValue">
+              {% if cliente %}
+                {{ cliente.telefone|default:"—" }}
+              {% else %}
+                —
+              {% endif %}
+            </p>
           </div>
           <div class="infoItem">
             <p class="infoLabel">E-mail:</p>
-            <p class="infoValue">bianca@gmail.com</p>
+            <p class="infoValue">
+              {% if cliente %}
+                {{ cliente.email|default:"—" }}
+              {% else %}
+                —
+              {% endif %}
+            </p>
           </div>
         </div>
       </div>
@@ -98,20 +122,37 @@
       <div class="pedidoCliente">
         <h3 class="textopd">Festa do cliente</h3>
         <div class="linhaCinza"></div>
-        <div class="pedidoItem">
-          <span class="pedidoNome">Tema:</span>
-          <span class="pedidoPreco">Wicked</span>
-        </div>
-        <div class="linhaCinza"></div>
-        <div class="pedidoItem">
-          <span class="pedidoNome">Local:</span>
-        <span class="pedidoPreco">Avenida severino massa spineli</span>
-        </div>
-        <div class="linhaCinza"></div>
-        <div class="valorTotal">
-          <span>Valor Total:</span>
-          <span class="totalPreco">R$ 300,00</span>
-        </div>
+        {% if festa %}
+          <div class="pedidoItem">
+            <span class="pedidoNome">Tema:</span>
+            <span class="pedidoPreco">{{ festa.nome_festa }}</span>
+          </div>
+          <div class="linhaCinza"></div>
+          <div class="pedidoItem">
+            <span class="pedidoNome">Data:</span>
+            <span class="pedidoPreco">{{ festa.data|date:"d/m/Y" }}</span>
+          </div>
+          <div class="linhaCinza"></div>
+          <div class="pedidoItem">
+            <span class="pedidoNome">Local:</span>
+            <span class="pedidoPreco">{{ festa.local }}</span>
+          </div>
+          <div class="linhaCinza"></div>
+          <div class="valorTotal">
+            <span>Valor Total:</span>
+            <span class="totalPreco">
+              {% if festa.preco %}
+                R$ {{ festa.preco|floatformat:2 }}
+              {% else %}
+                —
+              {% endif %}
+            </span>
+          </div>
+        {% else %}
+          <p class="sem-festa">
+            Nenhuma festa cadastrada para este cliente ainda.
+          </p>
+        {% endif %}
       </div>
   </main>
 
@@ -231,7 +272,7 @@
     });
   })();
 </script>
-
+<script src="{% static 'forum/nav.js' %}"></script>
 
 </body>
 </html>

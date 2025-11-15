@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{% static 'forum/style.css' %}">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body data-section="clientes">
     <div class="container">
     <!-- side bar -->
     <aside class="sidebar">
@@ -17,24 +17,24 @@
       </div>
 
       <nav class="menu">
-        <a href="{% url 'home' %}" class="menu-item">
+        <a href="{% url 'home' %}" class="menu-item" data-section="home">
             <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
           <span>Principal</span>
         </a>
-        <a href="{% url 'contratos' %}" class="menu-item">
+        <a href="{% url 'contratos' %}" class="menu-item" data-section="contratos">
           <i data-lucide="file-text"></i>
-          <span>Contrato</span>
+          <span>Contratos</span>
         </a>
-        <a href="{% url 'lista_clientes' %}" class="menu-item">
+        <a href="{% url 'lista_clientes' %}" class="menu-item active" data-section="clientes">
           <i data-lucide="users"></i>
           <span>Clientes</span>
         </a>
-          <a href="{% url 'listar_itens' %}" class="menu-item">
+          <a href="{% url 'listar_itens' %}" class="menu-item" data-section="itens">
           <i data-lucide="package"></i>
           <span>Itens</span>
           </a>
   
-        <a href="{% url 'painel_financeiro' %}"  class="menu-item">
+        <a href="{% url 'painel_financeiro' %}"  class="menu-item" data-section="financas">
           <i data-lucide="wallet"></i>
           <span>Financeiro</span>
         </a>
@@ -80,8 +80,10 @@
     </thead>
     <tbody>
       {% for cliente in clientes %}
-      <tr>
-        <td>{{ cliente.nome }}</td>
+      <tr class="cliente-row" onclick="window.location.href='{% url 'contrato_cliente' cliente.id %}'">
+        <td class="cliente-link">
+          {{ cliente.nome }}
+        </td>
         <td>{{ cliente.telefone }}</td>
         <td>{{ cliente.email }}</td>
         <td>Ativo</td>
@@ -104,6 +106,5 @@
   <script>
     lucide.createIcons();
   </script>
- <script src="{% static 'forum/nav.js' %}"></script>
 </body>
 </html>

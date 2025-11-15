@@ -1,122 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRM Festas</title>
-  {% load static %} 
-  <link rel="stylesheet" href="{% static 'home/style.css' %}">
-  <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-  <div class="container">
-    <!-- side bar -->
-    <aside class="sidebar">
-      <div class="logo">
-        <img src="{% static 'home/img/logobranca.png' %}"> <!-- imagem do logo '0' -->
-      </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRM Festas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/style.css' %}" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body data-section="home">
+    <div class="container">
+      <!-- side bar -->
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="{% static 'home/img/logobranca.png' %}" />
+          <!-- imagem do logo '0' -->
+        </div>
 
-      <nav class="menu">
-        <a href="{% url 'home' %}" class="menu-item active">
-            <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
-          <span>Principal</span>
-        </a>
-        <a href="{% url 'contratos' %}" class="menu-item">
-            <i data-lucide="file-text"></i>
-            <span>Contrato</span>
+        <nav class="menu">
+          <a
+            href="{% url 'home' %}"
+            class="menu-item active"
+            data-section="home"
+          >
+            <i data-lucide="home"></i>
+            <!-- escolhe o icone 'home' do site do lucide -->
+            <span>Principal</span>
           </a>
-         <a href="{% url 'lista_clientes' %}" class="menu-item">
-          <i data-lucide="users"></i>
-          <span>Clientes</span>
-        </a>
+          <a
+            href="{% url 'contratos' %}"
+            class="menu-item"
+            data-section="contratos"
+          >
+            <i data-lucide="file-text"></i>
+            <span>Contratos</span>
+          </a>
+          <a
+            href="{% url 'lista_clientes' %}"
+            class="menu-item"
+            data-section="clientes"
+          >
+            <i data-lucide="users"></i>
+            <span>Clientes</span>
+          </a>
 
-        <a href="{% url 'listar_itens' %}"  class="menu-item">
-          <i data-lucide="package"></i>
-          <span>Itens</span>
-        </a>
-          <a href="{% url 'painel_financeiro' %}"  class="menu-item">
+          <a
+            href="{% url 'listar_itens' %}"
+            class="menu-item"
+            data-section="itens"
+          >
+            <i data-lucide="package"></i>
+            <span>Itens</span>
+          </a>
+          <a
+            href="{% url 'painel_financeiro' %}"
+            class="menu-item"
+            data-section="financas"
+          >
+            <i data-lucide="wallet"></i>
+            <span>Financeiro</span>
+          </a>
+        </nav>
 
-          <i data-lucide="wallet"></i>
-          <span>Financeiro</span>
-        </a>
-      </nav>
-
-      <div class="logout">
-        <a href="#">
-          <i data-lucide="log-out"></i>
-          <span>Sair</span>
-        </a>
-      </div>
-    </aside>
-
-    <main class="main">
-      <h1>Bem-vindo de volta, NOME!</h1>
-
-       <section class="cards">
-        <div class="card">
-          <span>👤</span>
-          <p>{{total_festas}}</p>
-          <small>Total de Eventos</small>
+        <div class="logout">
+          <a href="#">
+            <i data-lucide="log-out"></i>
+            <span>Sair</span>
+          </a>
         </div>
-        
-        <div class="card">
-          <span>🛍️</span>
-          <p>{{total_itens}}</p>
-          <small>Total de material</small>
-        </div>
-        
-        <div class="card">
-          <span>💰</span>
-          <p>{{ total_precos }}</p>
-          <small>Total de Lucros</small>
-        </div>
-      </section>
-       
+      </aside>
 
-      <div class="grid">
-        <section class="calendar">
-          <h2>Calendário</h2> 
-             {% for festa in festas %}
-          <td>{{ festa.data }}--</td> 
-          <td><em>{{ festa.nome_festa }}</em></td>
-          <br>
-          {% endfor %}
-          <div class="calendar-box">
-           
-            <div class="calendar" id="calendar">     
-            </div>
+      <main class="main">
+        <h1>Bem-vindo de volta, NOME!</h1>
+
+        <section class="cards">
+          <div class="card">
+            <span>👤</span>
+            <p>{{total_festas}}</p>
+            <small>Total de Eventos</small>
+          </div>
+
+          <div class="card">
+            <span>🛍️</span>
+            <p>{{total_itens}}</p>
+            <small>Total de material</small>
+          </div>
+
+          <div class="card">
+            <span>💰</span>
+            <p>{{ total_precos }}</p>
+            <small>Total de Lucros</small>
           </div>
         </section>
 
-        <section class="events">
-          <h2>Eventos</h2>
+        <div class="grid">
+          <section class="calendar">
+            <h2>Calendário</h2>
             {% for festa in festas %}
-              <tr>
-        
-               <br>
-              
-                <td><em>{{ festa.nome_festa }}</em></td>
-               
-             
-              </tr>
-                {% endfor %}
-             
+            <td>{{ festa.data }}--</td>
+            <td><em>{{ festa.nome_festa }}</em></td>
+            <br />
+            {% endfor %}
+            <div class="calendar-box">
+              <div class="calendar" id="calendar"></div>
+            </div>
+          </section>
+
+          <section class="events">
+            <h2>Eventos</h2>
+            {% for festa in festas %}
+            <tr>
+              <br />
+
+              <td><em>{{ festa.nome_festa }}</em></td>
+            </tr>
+            {% endfor %}
+          </section>
+        </div>
+
+        <section class="list">
+          <h2>Lista</h2>
+          <label><input type="checkbox" /> Comprar mesa para festa</label>
+          <label><input type="checkbox" /> Comprar tecido</label>
         </section>
-      </div>
-    
+      </main>
+    </div>
 
-      <section class="list">
-        <h2>Lista</h2>
-        <label><input type="checkbox"> Comprar mesa para festa</label>
-        <label><input type="checkbox"> Comprar tecido</label>
-      </section>
-
-    </main>
-  </div>
-
-  <script>
-    lucide.createIcons();
-  </script>
-  <script src="home/script.js"></script>
-</body>
+    <script>
+      lucide.createIcons();
+    </script>
+    <script src="home/script.js"></script>
+  </body>
 </html>

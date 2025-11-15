@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'itens/styleItem.css' %}">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
-  <body>
+  <body data-section="itens">
     <div class="container">
       <!-- side bar -->
       <aside class="sidebar">
@@ -19,24 +19,24 @@
 
         
       <nav class="menu">
-        <a href="{% url 'home' %}" class="menu-item active">
+        <a href="{% url 'home' %}" class="menu-item" data-section="home">
             <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
           <span>Principal</span>
         </a>
-        <a href="{% url 'contratos' %}" class="menu-item">
+        <a href="{% url 'contratos' %}" class="menu-item" data-section="contratos">
             <i data-lucide="file-text"></i>
-            <span>Contrato</span>
+            <span>Contratos</span>
           </a>
 
-          <a href="{% url 'lista_clientes' %}" class="menu-item">
+          <a href="{% url 'lista_clientes' %}" class="menu-item" data-section="clientes">
             <i data-lucide="users"></i>
             <span>Clientes</span>
           </a>
-         <a  href="{% url 'listar_itens' %}"class="menu-item active">
+         <a href="{% url 'listar_itens' %}" class="menu-item active" data-section="itens">
             <i data-lucide="package"></i>
             <span>Itens</span>
           </a>
-          <a href="{% url 'painel_financeiro' %}" class="menu-item">
+          <a href="{% url 'painel_financeiro' %}" class="menu-item" data-section="financas">
             <i data-lucide="wallet"></i>
             <span>Financeiro</span>
           </a>
