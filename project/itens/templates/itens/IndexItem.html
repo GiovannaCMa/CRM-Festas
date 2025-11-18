@@ -4,26 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página de Itens</title>
-   {% load static %} 
+    {% load static %}
     <link rel="stylesheet" href="{% static 'itens/styleItem.css' %}">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
+
   <body data-section="itens">
+    
+    {% csrf_token %}
+    
+
     <div class="container">
-      <!-- side bar -->
+
+      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="logo">
-         <img src="{% static 'itens/img/logobranca.png' %}">
-          <!-- imagem do logo '0' -->
+          <img src="{% static 'itens/img/logobranca.png' %}">
         </div>
 
-        
-      <nav class="menu">
-        <a href="{% url 'home' %}" class="menu-item" data-section="home">
-            <i data-lucide="home"></i>  <!-- escolhe o icone 'home' do site do lucide -->
-          <span>Principal</span>
-        </a>
-        <a href="{% url 'contratos' %}" class="menu-item" data-section="contratos">
+        <nav class="menu">
+          <a href="{% url 'home' %}" class="menu-item" data-section="home">
+            <i data-lucide="home"></i>
+            <span>Principal</span>
+          </a>
+
+          <a href="{% url 'contratos' %}" class="menu-item" data-section="contratos">
             <i data-lucide="file-text"></i>
             <span>Contratos</span>
           </a>
@@ -32,10 +37,12 @@
             <i data-lucide="users"></i>
             <span>Clientes</span>
           </a>
-         <a href="{% url 'listar_itens' %}" class="menu-item active" data-section="itens">
+
+          <a href="{% url 'listar_itens' %}" class="menu-item active" data-section="itens">
             <i data-lucide="package"></i>
             <span>Itens</span>
           </a>
+
           <a href="{% url 'painel_financeiro' %}" class="menu-item" data-section="financas">
             <i data-lucide="wallet"></i>
             <span>Financeiro</span>
@@ -51,92 +58,120 @@
         </div>
       </aside>
 
-      <!-- Área de conteúdo principal -->
+      <!-- MAIN CONTENT -->
       <main class="main-content">
         <div class="content-header">
           <h1>Itens</h1>
         </div>
 
-        <!-- Container unificado -->
-      <form method="get" action="{% url 'listar_itens' %}" class="search-form">
-        <div class="unified-container">
-          <div class="textos-de-cima">
-            <div class="Pesquisar" >Pesquisar</div>
-          </div>
-          <div class="search-row">
-            <div class="search-field">
-             <input type="text" id="pesquisar" placeholder="Pesquisar o cód, nome, categoria..." value="{{ request.GET.pesquisar }}" name="pesquisar">
-              <i class="search-icon" data-lucide="search"></i>
-            </div>
-          </div>
-          <div class="search-row">
-            <div class="action-button1">
-              <button class="btn-primary" type="submit">Aplicar</button>
-            </div>
-            <div class="action-button2">
-              <button class="btn-secondary">Limpar</button>
-            </div>
-          </div>
-
-          <div class="dropdown-fields">
-            <div class="dropdown-field-word1">Ordenar por :</div>
-            <div class="dropdown-field1">
-              <button class="order-button" type="button">
-                Nenhum selecionado
-              </button>
-              <i data-lucide="chevron-down"></i>
-              <div class="order-menu" aria-hidden="true">
-                <label
-                  ><input type="radio" name="order" value="name" /><span
-                    >Nome</span
-                  ></label
-                >
-                <label
-                  ><input type="radio" name="order" value="date" /><span
-                    >Data</span
-                  ></label
-                >
-                <label
-                  ><input type="radio" name="order" value="color" /><span
-                    >Cor</span
-                  ></label
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="linha-horizontal-cinza"></div>
-
-          <div class="itens-container" id="itensContainer">
-            <div class="item-name-container">
-              <div class="item-name-item"><h2>ID</h2></div>
-              <div class="item-name-estoque"><h2>Material</h2></div>
-              <div class="item-name-preco"><h2>Quantidade</h2></div>
-            </div>
-            <div class="item-row" id="item-original">
+        <form method="get" action="{% url 'listar_itens' %}" class="search-form">
+          <div class="unified-container">
             
-                </div>
+            <div class="textos-de-cima">
+              <div class="Pesquisar">Pesquisar</div>
+            </div>
 
-                {% for material in materiais %}
-                <div class="item-info">
-                  <div class="col">{{ material.id }}</div>
-                  <div class="col">{{ material.item }}</div>
-                  <div class="col">{{ material.quant }}</div>
+            <div class="search-row">
+              <div class="search-field">
+                <input 
+                  type="text" 
+                  id="pesquisar" 
+                  placeholder="Pesquisar o cód, nome, categoria..." 
+                  value="{{ request.GET.pesquisar }}"
+                  name="pesquisar"
+                >
+                <i class="search-icon" data-lucide="search"></i>
+              </div>
+            </div>
+
+            <div class="search-row">
+              <div class="action-button1">
+                <button class="btn-primary" type="submit">Aplicar</button>
+              </div>
+              <div class="action-button2">
+                <button class="btn-secondary" type="reset">Limpar</button>
+              </div>
+            </div>
+
+            <div class="dropdown-fields">
+              <div class="dropdown-field-word1">Ordenar por :</div>
+              <div class="dropdown-field1">
+                <button class="order-button" type="button">Nenhum selecionado</button>
+                <i data-lucide="chevron-down"></i>
+
+                <div class="order-menu" aria-hidden="true">
+                  <label><input type="radio" name="order" value="name"><span>Nome</span></label>
+                  <label><input type="radio" name="order" value="date"><span>Data</span></label>
+                  <label><input type="radio" name="order" value="color"><span>Cor</span></label>
                 </div>
-                {% endfor %}
+              </div>
+            </div>
+
+            <div class="linha-horizontal-cinza"></div>
+
+            <!-- LISTAGEM DOS ITENS -->
+            <div class="itens-container" id="itensContainer">
+
+              <!-- Cabeçalho -->
+              <div class="item-header">
+                  <div>ID</div>
+                  <div>Material</div>
+                  <div>Quantidade</div>
+                  <div>Ações</div>
               </div>
 
+
+              <!-- Loop dos itens -->
+                  {% for material in materiais %}
+                  <div class="item-info">
+
+                      <div class="col">{{ material.id }}</div>
+                      <div class="col">{{ material.item }}</div>
+                      <div class="col">{{ material.quant }}</div>
+
+                      <div class="col acoes">
+                          <button type="button" class="btn-delete"
+                              onclick="abrirModal('{{ material.id }}', '{{ material.item }}')">
+                              <i data-lucide="trash-2"></i>
+                          </button>
+                      </div>
+
+                  </div>
+                  {% endfor %}
+
+            </div>
           </div>
-          </form>
-        </div>
+        </form>
+        {% csrf_token %}
+
       </main>
+
+    </div>
 
     <script>
       lucide.createIcons();
+    </script>
+    
+    
+    
+    <div id="modalExcluir" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+        <h2>Confirmar Exclusão</h2>
+        <p id="modalTexto">Tem certeza que deseja excluir?</p>
 
-      </script>
-      <script src="{% static 'itens/script.js' %}"></script>
+        <div class="modal-actions">
 
-   
+            <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+
+            <!-- AQUI fica o elemento que guarda o URL -->
+            <div id="formExcluir" data-url=""></div>
+
+            <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
+
+
+        </div>
+    </div>
+
+    <script src="{% static 'itens/script.js' %}"></script>
   </body>
 </html>

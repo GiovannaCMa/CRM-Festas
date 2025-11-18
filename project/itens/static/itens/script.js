@@ -1,5 +1,7 @@
 
       // conexao com o html
+      console.log("JS carregado!");
+
       document.addEventListener("DOMContentLoaded", function () {
         const btnApply = document.querySelector(".btn-primary");
         const btnLimpar = document.querySelector(".btn-secondary");
@@ -117,3 +119,37 @@
           });
         }
       });
+
+
+function abrirModal(id, nome) {
+    document.getElementById("modalTexto").innerText =
+        "Tem certeza que deseja excluir o item: " + nome + "?";
+
+    document.getElementById("formExcluir").dataset.url =
+        `/itens/excluir/${id}/`;
+
+    document.getElementById("modalExcluir").style.display = "flex";
+}
+
+
+function fecharModal() {
+    document.getElementById("modalExcluir").style.display = "none";
+}
+function confirmarExclusao() {
+    const url = document.getElementById("formExcluir").dataset.url;
+
+    if (!url) {
+        console.error("ERRO: URL de exclusão não encontrada!");
+        return;
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+
+    const csrf = document.querySelector("[name=csrfmiddlewaretoken]").cloneNode();
+    form.appendChild(csrf);
+
+    document.body.appendChild(form);
+    form.submit();
+}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Material
 
 def itens(request):
@@ -8,11 +8,9 @@ def listar_itens(request):
     termo = request.GET.get('pesquisar', '').strip()
 
     if termo:
-        # busca por texto no campo 'item' (ajuste o nome se seu model usa outro)
         qs_text = Material.objects.filter(item__icontains=termo)
-
-        # tentar buscar quantidade ou id se for número
         qs_num = Material.objects.none()
+
         if termo.isdigit():
             num = int(termo)
             qs_num = Material.objects.filter(id=num) | Material.objects.filter(quant=num)
@@ -21,6 +19,24 @@ def listar_itens(request):
     else:
         materiais = Material.objects.all()
 
-    # opcional: enviar o termo de volta para preencher o campo no template
-    return render(request, 'itens/indexItem.html', {'materiais': materiais, 'pesquisar': termo})
+    return render(request, 'itens/indexItem.html', {
+        'materiais': materiais,
+        'pesquisar': termo
+    })
 
+
+# MOSTRA tela de confirmação
+def confirmar_exclusao(request, id):
+    material = get_object_or_404(Material, id=id)
+    return render(request, 'itens/confirmar_exclusao.html', {'material': material})
+
+
+#  EXCLUIr
+def excluir_item(request, id):
+    material = get_object_or_404(Material, id=id)
+
+    if request.method == "POST":
+        material.delete()
+        return redirect('listar_itens')
+
+    return redirect('confirmar_exclusao', id=id)

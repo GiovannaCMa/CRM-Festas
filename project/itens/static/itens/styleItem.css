@@ -290,12 +290,46 @@ i[data-lucide] {
   border-bottom: none;
 }
 
+/* Layout da linha de itens em 4 colunas */
 .item-info {
-  flex: 2;
-  display: flex;
-  align-items: center;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 0.5fr; /* ID | Material | Quantidade | Ações */
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
 }
+
+/* Lixeira alinhada à direita */
+.col.acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo da lixeira */
+.btn-delete {
+  color: #b30000;
+  padding: 6px 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  text-decoration: none;
+}
+.btn-delete button{
+  margin: none;
+}
+
+.btn-delete:hover {
+  background-color: #ffe5e5;
+}
+
+.btn-delete i[data-lucide] {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.5;
+}
+
 
 .item-image {
   width: 140px;
@@ -904,4 +938,113 @@ i[data-lucide] {
 
 .item-info:hover {
   background-color: #f6edf9; /* leve lilás ao passar o mouse */
+}
+/* Cabeçalho em grid alinhado com as linhas */
+.item-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 0.5fr;
+  font-weight: 700;
+  font-size: 20px;
+  color: #3f1947;
+  padding: 12px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ccc;
+  gap: 30px;
+  
+}
+.item-header,
+.item-info {
+  display: grid;
+  grid-template-columns: 80px 700px 150px 200px; /* FIXO e perfeito */
+  align-items: center;
+}
+/* Fundo escurecido */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Caixa central */
+.modal-box {
+  background: white;
+  padding: 30px;
+  width: 420px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Título */
+.modal-box h2 {
+  font-size: 22px;
+  color: #471651;
+  margin-bottom: 10px;
+}
+
+/* Texto */
+.modal-box p {
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Botões */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancelar {
+  background: #ddd;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-cancelar:hover {
+  background: #c9c9c9;
+}
+
+.btn-confirmar {
+  background: #8b2da0;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-confirmar:hover {
+  background: #6d1f7c;
+}
+/* Remove fundo, borda, padding e deixa só o ícone */
+.btn-delete {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-delete i {
+    color: #d10000; /* vermelho */
+    width: 22px;
+    height: 22px;
+}
+
+/* Hover mais bonitinho */
+.btn-delete:hover i {
+    color: #a00000;
+    transform: scale(1.1);
+    transition: 0.2s;
 }
