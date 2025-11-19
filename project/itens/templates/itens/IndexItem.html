@@ -10,9 +10,6 @@
   </head>
 
   <body data-section="itens">
-    
-    {% csrf_token %}
-    
 
     <div class="container">
 
@@ -49,7 +46,6 @@
           </a>
         </nav>
 
-
         <div class="logout">
           <a href="#">
             <i data-lucide="log-out"></i>
@@ -65,6 +61,7 @@
         </div>
 
         <form method="get" action="{% url 'listar_itens' %}" class="search-form">
+
           <div class="unified-container">
             
             <div class="textos-de-cima">
@@ -120,29 +117,37 @@
                   <div>Ações</div>
               </div>
 
-
               <!-- Loop dos itens -->
-                  {% for material in materiais %}
-                  <div class="item-info">
+              {% for material in materiais %}
+              <div class="item-info">
 
-                      <div class="col">{{ material.id }}</div>
-                      <div class="col">{{ material.item }}</div>
-                      <div class="col">{{ material.quant }}</div>
+                  <div class="col">{{ material.id }}</div>
+                  <div class="col">{{ material.item }}</div>
+                  <div class="col">{{ material.quant }}</div>
 
-                      <div class="col acoes">
-                          <button type="button" class="btn-delete"
-                              onclick="abrirModal('{{ material.id }}', '{{ material.item }}')">
-                              <i data-lucide="trash-2"></i>
-                          </button>
-                      </div>
+                  <div class="col acoes">
+
+                      <!-- EXCLUIR -->
+                      <button type="button" class="btn-delete"
+                          onclick="abrirModal('{{ material.id }}', '{{ material.item }}')">
+                          <i data-lucide="trash-2"></i>
+                      </button>
+
+                      <!-- EDITAR -->
+                      <button type="button" class="btn-edit"
+                          onclick="abrirEditar('{{ material.id }}')">
+                          <i data-lucide="pencil"></i>
+                      </button>
 
                   </div>
-                  {% endfor %}
+
+              </div>
+              {% endfor %}
 
             </div>
+
           </div>
         </form>
-        {% csrf_token %}
 
       </main>
 
@@ -151,27 +156,70 @@
     <script>
       lucide.createIcons();
     </script>
-    
-    
-    
+
+
+    <!-- MODAL EXCLUIR -->
     <div id="modalExcluir" class="modal-overlay" style="display: none;">
-    <div class="modal-box">
+      <div class="modal-box">
         <h2>Confirmar Exclusão</h2>
         <p id="modalTexto">Tem certeza que deseja excluir?</p>
 
         <div class="modal-actions">
-
-            <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
-
-            <!-- AQUI fica o elemento que guarda o URL -->
-            <div id="formExcluir" data-url=""></div>
-
-            <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
-
-
+          <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+          <div id="formExcluir" data-url=""></div>
+          <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
         </div>
+      </div>
+    </div>
+
+
+
+        <!-- MENU DE OPÇÕES DE EDIÇÃO -->
+    <div id="menuEditar" class="modal-overlay" style="display:none;">
+      <div class="modal-box">
+          <h2>O que deseja editar?</h2>
+
+          <div class="modal-actions" style="flex-direction:column; gap:10px;">
+
+              <button class="btn-edit-option" onclick="editarCampo('item')">
+                  Nome
+              </button>
+
+              <button class="btn-edit-option" onclick="editarCampo('quant')">
+                  Quantidade
+              </button>
+
+              <button class="btn-cancelar" onclick="fecharMenuEditar()">
+                  Cancelar
+              </button>
+          </div>
+      </div>
+    </div>
+
+
+    <!-- MODAL DE EDIÇÃO (ÚNICO, CORRIGIDO) -->
+    <div id="modalEditar" class="modal-overlay" style="display: none;">
+      <div class="modal-box">
+          <h2 id="tituloEdicao">Editar</h2>
+
+          <form id="formEdicao" method="POST">
+              {% csrf_token %}
+
+              <input type="hidden" name="id" id="editarId">
+              <input type="hidden" name="campo" id="editarCampo">
+
+              <label id="labelCampo">Nova Quantidade:</label>
+              <input type="text" name="valor" id="editarValor" class="input-editar">
+
+              <div class="modal-actions" style="margin-top:20px; gap:10px;">
+                  <button type="button" class="btn-cancelar" onclick="fecharModalEditar()">Cancelar</button>
+                  <button type="submit" class="btn-confirmar">Salvar</button>
+              </div>
+          </form>
+      </div>
     </div>
 
     <script src="{% static 'itens/script.js' %}"></script>
+
   </body>
 </html>

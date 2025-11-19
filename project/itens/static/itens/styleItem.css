@@ -303,6 +303,7 @@ i[data-lucide] {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 /* Estilo da lixeira */
@@ -1028,8 +1029,9 @@ i[data-lucide] {
 .btn-confirmar:hover {
   background: #6d1f7c;
 }
-/* Remove fundo, borda, padding e deixa só o ícone */
-.btn-delete {
+
+
+/* .btn-delete {
     background: none;
     border: none;
     padding: 0;
@@ -1037,14 +1039,103 @@ i[data-lucide] {
 }
 
 .btn-delete i {
-    color: #d10000; /* vermelho */
+    color: #d10000; 
     width: 22px;
     height: 22px;
 }
 
-/* Hover mais bonitinho */
+
 .btn-delete:hover i {
     color: #a00000;
     transform: scale(1.1);
     transition: 0.2s;
+}
+ */
+
+/* REMOVE FUNDO E BORDA DA LIXEIRA E DA CANETA */
+.btn-delete,
+.btn-edit {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+/* Deixa os ícones perfeitos */
+.btn-delete i,
+.btn-edit i {
+    width: 22px !important;
+    height: 22px !important;
+    display: inline-block;
+}
+
+/* Cor da caneta */
+.btn-edit i {
+    color: #000 !important;
+}
+
+/* Cor da lixeira */
+.btn-delete i {
+    color: #c40000 !important;
+}
+
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 380px;
+    text-align: center;
+}
+
+.edit-options button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-edit-option {
+    background-color: #eee;
+}
+
+.btn-edit-full {
+    background-color: #471651;
+    color: white;
+}
+
+.btn-edit-option:hover,
+.btn-edit-full:hover {
+    opacity: 0.8;
+}
+
+.btn-cancelar {
+    background-color: #c92e2e;
+    color: white;
+}
+.btn-edit-option{
+  border: none;
+  padding: 20px;
+  font-size: 15px;
+  transition:1s;
+  border-radius: 20px;
 }

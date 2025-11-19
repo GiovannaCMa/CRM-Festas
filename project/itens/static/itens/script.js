@@ -153,3 +153,95 @@ function confirmarExclusao() {
     document.body.appendChild(form);
     form.submit();
 }
+
+
+
+function abrirEditar(id) {
+    const modal = document.getElementById("modalEditar");
+    modal.style.display = "flex";
+
+    // salvar id no form
+    document.getElementById("editarId").value = id;
+
+    // limpar valor anterior
+    document.getElementById("editarValor").value = "";
+
+    // criar um texto bonitinho no modal
+    document.getElementById("tituloEdicao").innerText = "Editar Item #" + id;
+}
+function fecharModalEditar() {
+    document.getElementById("modalEditar").style.display = "none";
+}
+
+
+
+function abrirEditar(id) {
+    console.log("Abrindo edição para item:", id);
+
+    const modal = document.getElementById("modalEditar");
+    modal.style.display = "flex";
+
+    // ID para salvar
+    document.getElementById("editarId").value = id;
+
+    // Campo que está editando (por enquanto quant)
+    document.getElementById("editarCampo").value = "quant";
+
+    // Limpa valor anterior
+    document.getElementById("editarValor").value = "";
+
+    document.getElementById("tituloEdicao").innerText = "Editar Item #" + id;
+}
+
+
+function fecharModalEditar() {
+    const modal = document.getElementById("modalEditar");
+
+    if (!modal) {
+        console.error("modalEditar NÃO encontrado!");
+        return;
+    }
+
+    modal.style.display = "none";
+}
+
+
+// Abre o menu com as opções de edição
+function abrirEditar(id) {
+    window.currentEditingId = id; // guardamos o ID para usar depois
+    document.getElementById("menuEditar").style.display = "flex";
+}
+
+// Fecha o menu de seleção
+function fecharMenuEditar() {
+    document.getElementById("menuEditar").style.display = "none";
+}
+
+function editarCampo(campo) {
+    fecharMenuEditar(); 
+
+    const modal = document.getElementById("modalEditar");
+    modal.style.display = "flex";
+
+    // ID do item
+    document.getElementById("editarId").value = window.currentEditingId;
+
+    // campo que vai ser editado
+    document.getElementById("editarCampo").value = campo;
+
+    // Ajustar texto do modal
+    if (campo === "item") {
+        document.getElementById("tituloEdicao").innerText = "Editar Nome";
+        document.getElementById("labelCampo").innerText = "Novo nome:";
+    } else {
+        document.getElementById("tituloEdicao").innerText = "Editar Quantidade";
+        document.getElementById("labelCampo").innerText = "Nova quantidade:";
+    }
+
+    document.getElementById("editarValor").value = "";
+}
+
+
+function fecharModalEditar() {
+    document.getElementById("modalEditar").style.display = "none";
+}
