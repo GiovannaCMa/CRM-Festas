@@ -4,8 +4,8 @@ const senhaInput = document.getElementById('senha')
 const btn = document.querySelector('.btn-primary');
 
 const usuario = {
-  email: 'felipesalva@gmail.com',
-  senha: 'JGlacrou'
+  email: 'admcrm@gmail.com',
+  senha: '1234'
 };
 
 if (!btn) {
