@@ -79,6 +79,10 @@ class AuthUserUserPermissions(models.Model):
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=100)
+    tema = models.CharField(max_length=150, blank=True, null=True)
+    data_evento = models.DateField(blank=True, null=True)
+    local = models.CharField(max_length=150, blank=True, null=True)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     email = models.EmailField(unique=True)
     telefone = models.CharField(max_length=20)
 

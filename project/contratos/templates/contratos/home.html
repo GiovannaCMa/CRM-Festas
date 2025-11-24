@@ -41,7 +41,7 @@
 
 
 <div class="logout">
-      <a href="#">
+      <a href="{% url 'pagina_login' %}">
           <i data-lucide="log-out"></i>
           <span>Sair</span>
         </a>
@@ -122,26 +122,67 @@
       <div class="pedidoCliente">
         <h3 class="textopd">Festa do cliente</h3>
         <div class="linhaCinza"></div>
-        {% if festa %}
+        {% if cliente %}
+          <div class="pedidoItem">
+            <span class="pedidoNome">Nome:</span>
+            <span class="pedidoPreco">{{ cliente.nome|default:"—" }}</span>
+          </div>
+          <div class="linhaCinza"></div>
+          <div class="pedidoItem">
+            <span class="pedidoNome">E-mail:</span>
+            <span class="pedidoPreco">{{ cliente.email|default:"—" }}</span>
+          </div>
+          <div class="linhaCinza"></div>
+          <div class="pedidoItem">
+            <span class="pedidoNome">Telefone:</span>
+            <span class="pedidoPreco">{{ cliente.telefone|default:"—" }}</span>
+          </div>
+          <div class="linhaCinza"></div>
           <div class="pedidoItem">
             <span class="pedidoNome">Tema:</span>
-            <span class="pedidoPreco">{{ festa.nome_festa }}</span>
+            <span class="pedidoPreco">
+              {% if cliente.tema %}
+                {{ cliente.tema }}
+              {% elif festa and festa.nome_festa %}
+                {{ festa.nome_festa }}
+              {% else %}
+                —
+              {% endif %}
+            </span>
           </div>
           <div class="linhaCinza"></div>
           <div class="pedidoItem">
             <span class="pedidoNome">Data:</span>
-            <span class="pedidoPreco">{{ festa.data|date:"d/m/Y" }}</span>
+            <span class="pedidoPreco">
+              {% if cliente.data_evento %}
+                {{ cliente.data_evento|date:"d/m/Y" }}
+              {% elif festa and festa.data %}
+                {{ festa.data|date:"d/m/Y" }}
+              {% else %}
+                —
+              {% endif %}
+            </span>
           </div>
           <div class="linhaCinza"></div>
           <div class="pedidoItem">
             <span class="pedidoNome">Local:</span>
-            <span class="pedidoPreco">{{ festa.local }}</span>
+            <span class="pedidoPreco">
+              {% if cliente.local %}
+                {{ cliente.local }}
+              {% elif festa and festa.local %}
+                {{ festa.local }}
+              {% else %}
+                —
+              {% endif %}
+            </span>
           </div>
           <div class="linhaCinza"></div>
           <div class="valorTotal">
-            <span>Valor Total:</span>
+            <span>Valor:</span>
             <span class="totalPreco">
-              {% if festa.preco %}
+              {% if cliente.valor_total %}
+                R$ {{ cliente.valor_total|floatformat:2 }}
+              {% elif festa and festa.preco %}
                 R$ {{ festa.preco|floatformat:2 }}
               {% else %}
                 —
@@ -150,7 +191,7 @@
           </div>
         {% else %}
           <p class="sem-festa">
-            Nenhuma festa cadastrada para este cliente ainda.
+            Nenhum cliente selecionado.
           </p>
         {% endif %}
       </div>

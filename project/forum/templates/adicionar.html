@@ -12,7 +12,7 @@
       <!-- Sidebar -->
       <aside class="sidebar">
         <div class="logo">
-          <img src="{% static 'forum/logo.png' %}" alt="Logo do sistema" />
+          <img src="{% static 'forum/img/logobranca.png' %}" alt="Logo do sistema" />
         </div>
 
         <nav class="menu">
@@ -55,7 +55,7 @@
         </nav>
 
         <div class="logout">
-          <a href="#">
+          <a href="{% url 'pagina_login' %}">
             <i data-lucide="log-out"></i>
             <span>Sair</span>
           </a>
@@ -75,6 +75,26 @@
               <div class="campo">
                 <label for="id_nome">Nome</label>
                 {{ form.nome }}
+              </div>
+
+              <div class="campo">
+                <label for="id_tema">Tema</label>
+                {{ form.tema }}
+              </div>
+
+              <div class="campo">
+                <label for="id_data_evento">Data</label>
+                {{ form.data_evento }}
+              </div>
+
+              <div class="campo">
+                <label for="id_local">Local</label>
+                {{ form.local }}
+              </div>
+
+              <div class="campo">
+                <label for="id_valor_total">Valor</label>
+                {{ form.valor_total }}
               </div>
 
               <div class="campo">
@@ -104,6 +124,225 @@
 
     <script>
       lucide.createIcons();
+      
+      // Máscara de telefone com + e parênteses
+      const telefoneInput = document.getElementById('id_telefone');
+      
+      if (telefoneInput) {
+        telefoneInput.addEventListener('input', function(e) {
+          let inputValue = e.target.value;
+          let hasPlus = inputValue.trim().startsWith('+');
+          
+          // Remove tudo exceto números
+          let digits = inputValue.replace(/\D/g, '');
+          
+          let formatted = '';
+          
+          if (hasPlus && digits.length > 0) {
+            // Formato internacional: +XX (XX) XXXXX-XXXX
+            if (digits.length <= 2) {
+              formatted = '+' + digits;
+            } else if (digits.length <= 4) {
+              formatted = '+' + digits.substring(0, 2) + ' (' + digits.substring(2);
+            } else if (digits.length <= 9) {
+              formatted = '+' + digits.substring(0, 2) + ' (' + digits.substring(2, 4) + ') ' + digits.substring(4);
+            } else if (digits.length <= 13) {
+              formatted = '+' + digits.substring(0, 2) + ' (' + digits.substring(2, 4) + ') ' + digits.substring(4, 9) + '-' + digits.substring(9);
+            } else {
+              formatted = '+' + digits.substring(0, 2) + ' (' + digits.substring(2, 4) + ') ' + digits.substring(4, 9) + '-' + digits.substring(9, 13);
+            }
+          } else if (digits.length > 0) {
+            // Formato brasileiro: (XX) XXXXX-XXXX
+            if (digits.length <= 2) {
+              formatted = digits;
+            } else if (digits.length <= 7) {
+              formatted = '(' + digits.substring(0, 2) + ') ' + digits.substring(2);
+            } else if (digits.length <= 10) {
+              formatted = '(' + digits.substring(0, 2) + ') ' + digits.substring(2, 7) + '-' + digits.substring(7);
+            } else {
+              formatted = '(' + digits.substring(0, 2) + ') ' + digits.substring(2, 7) + '-' + digits.substring(7, 11);
+            }
+          }
+          
+          e.target.value = formatted;
+        });
+        
+        // Permite apenas números, +, espaços, parênteses e hífen
+        telefoneInput.addEventListener('keypress', function(e) {
+          const char = String.fromCharCode(e.which || e.keyCode);
+          const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End'];
+          
+          if (allowedKeys.includes(e.key)) {
+            return;
+          }
+          
+          // Permite + apenas no início
+          if (char === '+' && e.target.selectionStart === 0 && !e.target.value.includes('+')) {
+            return;
+          }
+          
+          if (!/[0-9]/.test(char) && !e.ctrlKey && !e.metaKey) {
+            e.preventDefault();
+          }
+        });
+      }
+
+      // Formatação automática para valor em reais
+      const valorInput = document.getElementById('id_valor_total');
+
+      const formatarValor = (valor) => {
+        const digits = valor.replace(/\D/g, '');
+        if (!digits) return '';
+
+        const numberValue = parseFloat(digits) / 100;
+        return numberValue.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      };
+
+      if (valorInput) {
+        valorInput.addEventListener('input', (e) => {
+          const formatted = formatarValor(e.target.value);
+          e.target.value = formatted;
+        });
+
+        valorInput.addEventListener('blur', (e) => {
+          if (e.target.value && !e.target.value.includes(',')) {
+            e.target.value = `${e.target.value},00`;
+          } else if (e.target.value) {
+            e.target.value = formatarValor(e.target.value);
+          }
+        });
+
+        if (valorInput.value) {
+          valorInput.value = formatarValor(valorInput.value);
+        }
+      }
+
+      // Placeholder para campo de data
+      const dataInput = document.getElementById('id_data_evento');
+      if (dataInput) {
+        // Adiciona estilo para mostrar placeholder quando vazio
+        dataInput.style.color = dataInput.value ? '#333' : '#aaa';
+        
+        // Previne seleção de texto quando o campo está vazio
+        const preventSelection = function(e) {
+          if (!dataInput.value) {
+            e.preventDefault();
+            window.getSelection().removeAllRanges();
+          }
+        };
+
+        dataInput.addEventListener('selectstart', preventSelection);
+        dataInput.addEventListener('mousedown', function(e) {
+          if (!dataInput.value) {
+            e.preventDefault();
+            dataInput.focus();
+            dataInput.showPicker && dataInput.showPicker();
+          }
+        });
+        
+        dataInput.addEventListener('change', function() {
+          this.style.color = this.value ? '#333' : '#aaa';
+        });
+        
+        dataInput.addEventListener('focus', function() {
+          this.style.color = '#333';
+        });
+
+        // Ao clicar no container do campo de data, abre o seletor
+        const dataContainer = dataInput.closest('.campo');
+        if (dataContainer) {
+          dataContainer.style.cursor = 'pointer';
+          dataContainer.addEventListener('click', function(e) {
+            // Se não clicou diretamente no input, foca no input e abre o seletor
+            if (e.target !== dataInput && !dataInput.contains(e.target)) {
+              e.preventDefault();
+              e.stopPropagation();
+              dataInput.focus();
+              // Tenta abrir o seletor de data
+              setTimeout(function() {
+                if (dataInput.showPicker) {
+                  dataInput.showPicker();
+                } else {
+                  // Fallback para navegadores que não suportam showPicker
+                  dataInput.click();
+                }
+              }, 10);
+            }
+          });
+        }
+
+        // Também permite clicar diretamente no label para abrir o seletor
+        const dataLabel = document.querySelector('label[for="id_data_evento"]');
+        if (dataLabel) {
+          dataLabel.style.cursor = 'pointer';
+          dataLabel.addEventListener('click', function(e) {
+            e.preventDefault();
+            dataInput.focus();
+            setTimeout(function() {
+              if (dataInput.showPicker) {
+                dataInput.showPicker();
+              } else {
+                dataInput.click();
+              }
+            }, 10);
+          });
+        }
+      }
     </script>
+    <style>
+      /* Garante que o placeholder do valor tenha a mesma cor cinza */
+      #id_valor_total::placeholder {
+        color: #aaa !important;
+      }
+      
+      /* Placeholder do campo de data quando vazio */
+      #id_data_evento:invalid {
+        color: #aaa;
+      }
+      
+      #id_data_evento:valid {
+        color: #333;
+      }
+
+      /* Torna o texto do campo de data não selecionável */
+      #id_data_evento:invalid {
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+      }
+
+      /* Remove cor de seleção (azul) quando vazio */
+      #id_data_evento:invalid::selection,
+      #id_data_evento:invalid::-moz-selection {
+        background: transparent !important;
+        color: #aaa !important;
+      }
+
+      /* Remove seleção dos pseudo-elementos do campo de data quando vazio */
+      #id_data_evento:invalid::-webkit-datetime-edit-text,
+      #id_data_evento:invalid::-webkit-datetime-edit-month-field,
+      #id_data_evento:invalid::-webkit-datetime-edit-day-field,
+      #id_data_evento:invalid::-webkit-datetime-edit-year-field {
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        -webkit-touch-callout: none !important;
+      }
+
+      /* Permite seleção apenas quando o campo tem valor */
+      #id_data_evento:valid {
+        user-select: text;
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+      }
+    </style>
   </body>
 </html>

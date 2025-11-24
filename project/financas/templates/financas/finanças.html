@@ -10,7 +10,79 @@
     <script src="https://unpkg.com/lucide@latest"></script>
    
 <link rel="stylesheet" href="{% static 'financas/finanças.css' %}" />
-
+    <script>
+      // Executa o mais cedo possível para evitar flash de item errado selecionado
+      (function() {
+        // Intercepta MutationObserver para remover active de qualquer item que não seja Financeiro
+        if (window.MutationObserver) {
+          const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.classList && target.classList.contains('menu-item')) {
+                  const isFinanceiro = target.dataset.section === 'financas';
+                  const hasActive = target.classList.contains('active');
+                  
+                  if (hasActive && !isFinanceiro) {
+                    target.classList.remove('active');
+                  }
+                  if (isFinanceiro && !hasActive) {
+                    target.classList.add('active');
+                  }
+                }
+              }
+            });
+          });
+          
+          // Inicia observação assim que possível
+          if (document.body) {
+            observer.observe(document.body, {
+              attributes: true,
+              subtree: true,
+              attributeFilter: ['class']
+            });
+          } else {
+            document.addEventListener('DOMContentLoaded', function() {
+              observer.observe(document.body, {
+                attributes: true,
+                subtree: true,
+                attributeFilter: ['class']
+              });
+            });
+          }
+        }
+        
+        // Função para garantir que apenas Financeiro esteja ativo
+        function fixMenuActive() {
+          if (document.querySelector) {
+            const menuItems = document.querySelectorAll('.menu .menu-item');
+            if (menuItems.length > 0) {
+              menuItems.forEach(item => {
+                const isFinanceiro = item.dataset.section === 'financas';
+                if (!isFinanceiro) {
+                  item.classList.remove('active');
+                } else {
+                  item.classList.add('active');
+                }
+              });
+            }
+          }
+        }
+        
+        // Executa múltiplas vezes para garantir
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            fixMenuActive();
+            setTimeout(fixMenuActive, 0);
+            setTimeout(fixMenuActive, 10);
+          });
+        } else {
+          fixMenuActive();
+          setTimeout(fixMenuActive, 0);
+          setTimeout(fixMenuActive, 10);
+        }
+      })();
+    </script>
 
   </head>
 
@@ -46,7 +118,7 @@
         </nav>
 
         <div class="logout">
-          <a href="#">
+          <a href="{% url 'pagina_login' %}">
             <i data-lucide="log-out"></i>
             <span>Sair</span>
           </a>
@@ -133,6 +205,39 @@
     <script src="{% static 'financas/finanças.js' %}"></script>
     <script>
       lucide.createIcons();
+      
+      // Garante que apenas o item Financeiro esteja ativo - executa continuamente
+      function setActiveMenuItem() {
+        const menuItems = document.querySelectorAll('.menu .menu-item');
+        menuItems.forEach(item => {
+          const isFinanceiro = item.dataset.section === 'financas';
+          if (!isFinanceiro) {
+            item.classList.remove('active');
+          } else {
+            item.classList.add('active');
+          }
+        });
+      }
+      
+      // Executa imediatamente
+      setActiveMenuItem();
+      
+      // Executa em múltiplos momentos para garantir
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setActiveMenuItem();
+          setTimeout(setActiveMenuItem, 0);
+          setTimeout(setActiveMenuItem, 10);
+          setTimeout(setActiveMenuItem, 50);
+        });
+      } else {
+        setTimeout(setActiveMenuItem, 0);
+        setTimeout(setActiveMenuItem, 10);
+        setTimeout(setActiveMenuItem, 50);
+      }
+      
+      // Monitora continuamente para remover active de qualquer item que não seja Financeiro
+      setInterval(setActiveMenuItem, 100);
     </script>
   </body>
 </html>

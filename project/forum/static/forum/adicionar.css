@@ -161,8 +161,79 @@ h1 {
 }
 
 .campo input::placeholder,
-.campo textarea::placeholder {
+.campo textarea::placeholder,
+.campo input[type="date"]::placeholder,
+.campo input[type="tel"]::placeholder {
     color: #aaa;
+}
+
+/* Garante que campos de data e valor tenham placeholder com a mesma cor */
+.campo input[type="date"]::-webkit-datetime-edit-text,
+.campo input[type="date"]::-webkit-datetime-edit-month-field,
+.campo input[type="date"]::-webkit-datetime-edit-day-field,
+.campo input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #aaa;
+}
+
+.campo input[type="date"]:invalid::-webkit-datetime-edit-text,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-month-field,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-day-field,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-year-field {
+    color: #aaa;
+}
+
+/* Placeholder para campo de data quando vazio */
+.campo input[type="date"]:invalid {
+    color: #aaa;
+}
+
+/* Garante que o placeholder do valor tenha a mesma cor */
+.campo input#id_valor_total::placeholder {
+    color: #aaa;
+}
+
+/* Torna o texto do campo de data não selecionável quando vazio */
+.campo input[type="date"]:invalid {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    pointer-events: auto;
+}
+
+/* Remove a cor de seleção (azul) do campo de data quando vazio */
+.campo input[type="date"]:invalid::-webkit-datetime-edit-text::selection,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-month-field::selection,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-day-field::selection,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-year-field::selection {
+    background: transparent;
+    color: #aaa;
+}
+
+.campo input[type="date"]:invalid::selection {
+    background: transparent;
+    color: #aaa;
+}
+
+/* Remove seleção dos pseudo-elementos do campo de data quando vazio */
+.campo input[type="date"]:invalid::-webkit-datetime-edit-text,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-month-field,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-day-field,
+.campo input[type="date"]:invalid::-webkit-datetime-edit-year-field {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Permite seleção quando o campo tem valor */
+.campo input[type="date"]:valid {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
 }
 
 .campo input:focus,

@@ -125,8 +125,12 @@ i[data-lucide] {
   background-color: #ffffff;
   border-radius: 30px;
   border: 1px solid #e5e5e5;
-  overflow: visible;
+  overflow-x: auto;
+  overflow-y: visible;
   padding: 25px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .search-row {
@@ -234,7 +238,7 @@ i[data-lucide] {
 
 .action-button1 {
   display: flex;
-  margin-left: 700px;
+  margin-left: auto;
   gap: 15px;
 }
 
@@ -303,7 +307,11 @@ i[data-lucide] {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+  white-space: normal;
+  overflow: visible;
+  min-width: auto;
+  flex-shrink: 0;
 }
 
 /* Estilo da lixeira */
@@ -935,6 +943,15 @@ i[data-lucide] {
 
 .col {
   padding: 6px 10px;
+  min-width: 0;
+  overflow: hidden;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.col:not(.acoes) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .item-info:hover {
@@ -956,8 +973,12 @@ i[data-lucide] {
 .item-header,
 .item-info {
   display: grid;
-  grid-template-columns: 80px 700px 150px 200px; /* FIXO e perfeito */
+  grid-template-columns: 60px minmax(0, 1fr) 100px 120px; /* ID | Material (flexível) | Quantidade | Ações */
   align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 /* Fundo escurecido */
 .modal-overlay {
