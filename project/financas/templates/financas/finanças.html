@@ -134,7 +134,7 @@
                     <div class="resumo">
                       <div>
                         <h4>Entradas</h4>
-                        <p>R$ {{total_precos}}</p>
+                        <p>R$ {{total_precos|floatformat:2}}</p>
                       </div>
                       <div>
                         <h4>Saídas</h4>
@@ -144,7 +144,7 @@
 
                     <div class="saldo">
                       <h4>Saldo Atual</h4>
-                      <p>R$ {{total_precos}}</p>
+                      <p>R$ {{total_precos|floatformat:2}}</p>
                     </div>
 
               
@@ -188,16 +188,24 @@
             <tbody>
               {% for festa in festas %}
               <tr>
-               <td>{{ festa.data }}</td>
+               <td>{{ festa.data|date:"d/m/Y" }}</td>
                 <td><em>{{ festa.nome_festa }}</em></td>
                
-               <td><em>{{ festa.preco }}</em></td>
+               <td><em>R$ {{ festa.preco|floatformat:2 }}</em></td>
               </tr>
                 {% endfor %}
+              
+              {% for cliente in clientes %}
+              <tr>
+                <td>{% if cliente.data_evento %}{{ cliente.data_evento|date:"d/m/Y" }}{% else %}-{% endif %}</td>
+                <td><em>{{ cliente.nome }}{% if cliente.tema %} - {{ cliente.tema }}{% endif %}</em></td>
+                <td><em>R$ {{ cliente.valor_total|floatformat:2 }}</em></td>
+              </tr>
+              {% endfor %}
              
             </tbody>
           </table>
-          <h4>Total de Preços: R$ {{ total_precos }}</h4>
+          <h4>Total de Preços: R$ {{ total_precos|floatformat:2 }}</h4>
         </section>
       </main>
     </div>
