@@ -57,12 +57,26 @@ class ClienteForm(forms.ModelForm):
         if not raw_value:
             return None
 
-        normalized = raw_value.replace('R$', '').replace(' ', '')
+        # Remove símbolos de moeda e espaços
+        normalized = raw_value.replace('R$', '').replace(' ', '').strip()
+        
+        # Se já está no formato numérico (ex: 1234.56), usa diretamente
+        if normalized.replace('.', '').replace('-', '').isdigit():
+            try:
+                valor_decimal = Decimal(normalized)
+                if valor_decimal < 0:
+                    raise ValidationError('O valor não pode ser negativo.')
+                return valor_decimal.quantize(Decimal('0.01'))
+            except (InvalidOperation, ValueError):
+                pass
+        
+        # Tenta converter formato brasileiro (1.234,56) para numérico
+        # Remove pontos (milhares) e substitui vírgula por ponto (decimal)
         normalized = normalized.replace('.', '').replace(',', '.')
-
+        
         try:
             valor_decimal = Decimal(normalized)
-        except InvalidOperation:
+        except (InvalidOperation, ValueError):
             raise ValidationError('Informe um valor válido.')
 
         if valor_decimal < 0:
