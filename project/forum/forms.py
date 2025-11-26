@@ -52,6 +52,10 @@ class ClienteForm(forms.ModelForm):
             raise ValidationError('A data do evento não pode ser anterior ao dia de hoje.')
         return data_evento
 
+    def clean_tema(self):
+        tema = self.cleaned_data.get('tema', '').strip()
+        return tema if tema else None
+    
     def clean_valor_total(self):
         raw_value = self.data.get(self.add_prefix('valor_total'), '').strip()
         if not raw_value:

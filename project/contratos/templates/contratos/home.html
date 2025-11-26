@@ -141,7 +141,7 @@
           <div class="pedidoItem">
             <span class="pedidoNome">Tema:</span>
             <span class="pedidoPreco">
-              {% if cliente.tema %}
+              {% if cliente.tema and cliente.tema.strip %}
                 {{ cliente.tema }}
               {% elif festa and festa.nome_festa %}
                 {{ festa.nome_festa }}
