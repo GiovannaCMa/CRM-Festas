@@ -248,10 +248,10 @@ tbody td {
   background-color: #f8f1fa;
 }
 
-.botoes button{
+ .botoes button{
     gap: 5%;
     width: 100px;
-    padding: 10px 20px 10px 20px;
+    padding: 20px 10px;
     border-radius: 50px;
     background-color: var(--cor-primaria);
     color: var(--back-color);
@@ -321,10 +321,10 @@ button[type="submit"] {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 8px;
+  padding: 10px 10px;
   border-radius: 8px;
   cursor: pointer;
-  width: 50%;
+  
   font-size: 16px;
   font-weight: 500;
   transition: background-color 0.2s;
