@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from forum.models import Festa 
+from forum.models import Cliente 
 from itens.models import Material 
 
 def home(request):
-    total_festas = Festa.objects.count() 
+    total_festas = Cliente.objects.count() 
     total_itens = Material.objects.count() # conta quantos registros existem 
-    festas = Festa.objects.all()
-    total_precos = sum(f.preco for f in festas if f.preco)
+    clientes = Cliente.objects.all()
+    total_precos = sum(c.valor_total for c in clientes if c.valor_total)
     return render(request, 'home/index.html', {
         'total_festas': total_festas,
          'total_itens': total_itens, 
-         'festas': festas,
+         'festas': clientes,
          'total_precos': total_precos})
    

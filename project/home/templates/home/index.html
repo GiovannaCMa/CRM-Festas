@@ -97,8 +97,9 @@
           <section class="calendar">
             <h2>Calendário</h2>
             {% for festa in festas %}
-            <td>{{ festa.data }}--</td>
-            <td><em>{{ festa.nome_festa }}</em></td>
+           {{ festa.local }}
+            {{ festa.data_evento }}
+           {{ festa.tema }}
             <br />
             {% endfor %}
             <div class="calendar-box">
@@ -111,8 +112,7 @@
             {% for festa in festas %}
             <tr>
               <br />
-
-              <td><em>{{ festa.nome_festa }}</em></td>
+              <td><em>{{ festa.tema}}</em></td>
             </tr>
             {% endfor %}
           </section>
